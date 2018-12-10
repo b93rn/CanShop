@@ -12,6 +12,8 @@ var salesSchema = mongoose.Schema({
         ref: 'Product',
         required: true
     }
+}, {
+    timestamps: true
 })
 
 var Sale = module.exports = mongoose.model('Sale', salesSchema)

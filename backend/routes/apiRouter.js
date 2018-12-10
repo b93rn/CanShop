@@ -35,4 +35,17 @@ router.route('/product/:product_id')
     .put(productController.update)
     .delete(productController.delete)
 
+// SALES
+var salesController = require('../controllers/salesController')
+
+router.route('/sales')
+    .get(salesController.index)
+    .post(salesController.new)
+
+router.route('/sale/:sale_id')
+    .get(salesController.view)
+    .patch(salesController.update)
+    .put(salesController.update)
+    .delete(salesController.delete)
+
 module.exports = router;
