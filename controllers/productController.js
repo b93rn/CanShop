@@ -1,0 +1,111 @@
+Product = require('../models/productModel')
+
+exports.index = function (req, res) {
+    Product.get(function (err, products) {
+        if (err) {
+            res.json({
+                status: "Error",
+                message: err
+            })
+        } else {
+            res.json({
+                status: "Success",
+                message: "Products succesfully retrieved",
+                data: products
+            })
+        }
+    })
+}
+
+// Post.
+exports.new = function (req, res) {
+    var product = new Product()
+    product.name = req.body.name
+    product.description = req.body.description
+    product.barcode = req.body.barcode
+    product.price = req.body.price
+    product.purchasePrice = req.body.purchasePrice
+    product.amount = req.body.amount ? req.body.amount : 0
+
+    product.save(function (err) {
+        if (err) {
+            res.json(err)
+        } else {
+            res.json({
+                status: "Success",
+                message: "New Prodct created",
+                data: product
+            })
+        }
+    })
+}
+// name, description  nn, ,barcode nn, price, purchasePrice, amount nn
+
+// GET.
+exports.view = function (req, res) {
+    Product.findById(req.params.product_id, function (err, product) {
+        if (err) {
+            res.json({
+                Status: "Error",
+                message: err
+            })
+        } else {
+            res.json({
+                message: "Product details loading...",
+                data: product
+            })
+        }
+    })
+}
+
+// PUT. 
+exports.update = function (req, res) {
+    Product.findById(req.params.product_id, function (err, product) {
+        if (err) {
+            res.json({
+                status: "Error",
+                message: err
+            })
+        } else {
+            product.name = req.body.name ? req.body.name : product.name
+            product.description = req.body.description ? req.body.description : product.description
+            product.barcode = req.body.barcode ? req.body.barcode : product.barcode 
+            product.price = req.body.price ? req.body.price : product.price  
+            product.purchasePrice = req.body.purchasePrice ? req.body.purchasePrice : product.purchasePrice 
+            product.amount = req.body.amount ? req.body.amount : product.amount
+
+            product.save(function(err) {
+                if(err) {
+                    res.json({
+                        status: "Error",
+                        message: err
+                    })
+                } else {
+                    res.json({
+                        message: "Product has been updated",
+                        data: product
+                    })
+                }
+            })
+        }
+    })
+}
+
+// DELETE
+exports.delete = function(req, res) {
+    Product.deleteOne({
+        _id: req.params.product_id
+    }, function(err, product) {
+        if(err) {
+            res.json({
+                status: "Error",
+                message: err
+            })
+        } else {
+            res.json({
+                status: "Success",
+                message: "Product has been deleted."
+            })
+        }
+    })
+}
