@@ -7,12 +7,41 @@
     <h5>CanShop</h5>
     <h6>CanShop</h6>
     <p>CanShop</p>
+    <Button
+     title="Annuleren"
+     color="yellow"
+     @onClick="cancel">
+    </Button>
+    <Button
+     title="Annuleren"
+     color="blue"
+     @onClick="cancel">
+    </Button>
+    <Button
+     title="Annuleren"
+     color="red"
+     @onClick="cancel">
+    </Button>
+    <Button
+     title="Annuleren"
+     color="green" 
+     @onClick="cancel">
+    </Button>
   </div>
 </template>
 
 <script>
+import Button from '../components/Button.vue'
 export default {
-  name: 'home'
+  name: 'home',
+  components: {
+    Button
+  },
+  methods: {
+    cancel: function() {
+      console.log('Annuleren')
+    }
+  }
 }
 </script>
 
