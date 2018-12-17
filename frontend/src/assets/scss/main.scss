@@ -1,2 +1,45 @@
 @import 'fonts.scss';
-@import 'colors.scss'
+@import 'colors.scss';
+
+.green {
+  background-color: var(--finance-green);
+  -webkit-box-shadow: 1px 6px 10px 0px var(--finance-green-shadow);
+  -moz-box-shadow: 1px 2px 6px 0px var(--finance-green-shadow);
+  box-shadow: 1px 2px 6px 0px var(--finance-green-shadow);
+}
+
+.yellow {
+  background-color: var(--finance-yellow);
+  -webkit-box-shadow: 1px 2px 6px 0px var(--finance-yellow-shadow);
+  -moz-box-shadow: 1px 2px 6px 0px var(--finance-yellow-shadow);
+  box-shadow: 1px 2px 6px 0px var(--finance-yellow-shadow);
+}
+
+.blue {
+  background-color: var(--finance-blue);
+  -webkit-box-shadow: 1px 2px 6px 0px var(--finance-blue-shadow);
+  -moz-box-shadow: 1px 2px 6px 0px var(--finance-blue-shadow);
+  box-shadow: 1px 2px 6px 0px var(--finance-blue-shadow);
+}
+
+.red {
+  background-color: var(--finance-red);
+  -webkit-box-shadow: 1px 2px 10px 0px var(--finance-red-shadow);
+  -moz-box-shadow: 1px 2px 10px 0px var(--finance-red-shadow);
+  box-shadow: 1px 2px 10px 0px var(--finance-red-shadow);
+}
+
+input {
+  width: 336px;
+  height: 46px;
+  margin-bottom: 16px;
+  border: none;
+  border-radius: 16px;
+  -webkit-box-shadow: 1px 2px 10px 0px var(--main-black-shadow);
+  -moz-box-shadow: 1px 2px 10px 0px var(--main-black-shadow);
+  // box-shadow: 1px 2px 10px 0px var(--main-black-shadowk);
+}
+input::placeholder {
+  text-align: center;
+  font-family: 'Roboto-Medium'
+}

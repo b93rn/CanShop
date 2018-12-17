@@ -12,18 +12,16 @@ export default {
 <style lang="scss">
 body {
   margin: 0;
+  background-color: var(--main-bg);
 }
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  min-width: 100vw;
-  min-height: 100vh;
-  width: 100%;
-  height: 100%;
-  margin: 0px;
-  padding: 16px;
+  width: 100vw;
+  max-width: 100%;
+  max-height: 100%;
   background-color: var(--main-bg);
   color: var(--main-black);
+  overflow: hidden;
 }
 </style>
