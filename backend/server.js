@@ -25,6 +25,12 @@ const port = process.env.port || 8080
 // Basic message.
 app.get('/', (req, res) => res.send('CanShop'))
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
 app.use('/api', apiRouter)
 
 // Launch app to listen to specified port
