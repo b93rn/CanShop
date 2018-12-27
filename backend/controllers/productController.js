@@ -26,6 +26,7 @@ exports.new = function (req, res) {
     product.price = req.body.price
     product.purchasePrice = req.body.purchasePrice
     product.amount = req.body.amount ? req.body.amount : 0
+    product.color = req.body.color ? req.body.color : '#FFFFFF'
 
     product.save(function (err) {
         if (err) {
@@ -73,6 +74,7 @@ exports.update = function (req, res) {
             product.price = req.body.price ? req.body.price : product.price  
             product.purchasePrice = req.body.purchasePrice ? req.body.purchasePrice : product.purchasePrice 
             product.amount = req.body.amount ? req.body.amount : product.amount
+            product.color = req.body.color ? req.body.color : product.color
 
             product.save(function(err) {
                 if(err) {

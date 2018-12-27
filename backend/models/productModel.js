@@ -29,6 +29,10 @@ var productSchema = mongoose.Schema({
     amount: {
         type: Number,
         required: false
+    },
+    color: {
+        type: String,
+        required: false
     }
 })
 

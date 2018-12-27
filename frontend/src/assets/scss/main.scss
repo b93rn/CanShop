@@ -37,9 +37,12 @@ input {
   border-radius: 16px;
   -webkit-box-shadow: 1px 2px 10px 0px var(--main-black-shadow);
   -moz-box-shadow: 1px 2px 10px 0px var(--main-black-shadow);
+  text-align: center;
+  font-family: 'Roboto-Medium';
   // box-shadow: 1px 2px 10px 0px var(--main-black-shadowk);
 }
 input::placeholder {
-  text-align: center;
-  font-family: 'Roboto-Medium'
+  // text-align: center;
+  // font-family: 'Roboto-Medium';
+  color: grey;
 }
