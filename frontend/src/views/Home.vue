@@ -10,15 +10,22 @@
     </div>
     <h2>Producten</h2>
     <div class="itemList">
-      <ItemCard itemName="Cola" price="0,30" quantity="37" color="#FF0741"/>
+      <!-- <ItemCard itemName="Cola" price="0,30" quantity="37" color="#FF0741"/>
       <ItemCard itemName="Sinas" price="0,20" quantity="21" color="#F7FF07"/>
-      <ItemCard itemName="Radler" price="0,70" quantity="9" color="#FFCD07"/>
+      <ItemCard itemName="Radler" price="0,70" quantity="9" color="#FFCD07"/> -->
+      <ItemCard 
+        :v-if="products"
+          v-for="item in products"
+          :key="item._id"
+          :product="item"
+      />
       <div class="addItem">
-        <icon-card text="+" :onClick="addUser" />
+        <icon-card text="+" :onClick="addProduct" />
       </div>
     </div>
   </div>
   <CreateUser />
+  <CreateProduct />
 </div>
 </template>
 
@@ -28,6 +35,7 @@ import IconCard from '../components/IconCard.vue'
 import UserCard from '../components/UserCard.vue'
 import ItemCard from '../components/ItemCard.vue'
 import CreateUser from '../components/CreateUser.vue'
+import CreateProduct from '../components/CreateProduct.vue'
 import { mapState } from 'vuex'
 
 export default {
@@ -36,20 +44,25 @@ export default {
     UserCard,
     IconCard,
     CreateUser,
+    CreateProduct,
     ItemCard
   },
   mounted() {
     this.$store.dispatch('loadUsers')
+    this.$store.dispatch('loadProducts')
   },
   methods: {
     addUser: function() {
-      console.log('Add user...')
       this.$store.commit('TOGGLE_CREATING_USER')
+    },
+    addProduct: function() {
+      this.$store.commit('TOGGLE_CREATING_PRODUCT')
     }
   },
   computed: {
     ...mapState([
-      'users'
+      'users',
+      'products'
     ])
   }
 }
@@ -65,13 +78,14 @@ export default {
  .userList {
    display: flex;
    flex-direction: row;
-   justify-content: flex-start;
+   justify-content: space-between;
    flex-wrap: wrap;
  }
  .itemList{
    display: flex;
    flex-direction: row;
-   justify-content: flex-start;
+   justify-content: space-between;
+  //  align-content: stretch;
    flex-wrap: wrap;
  }
  .addUser {
@@ -82,9 +96,9 @@ export default {
    align-items: center;
  }
  .addItem {
-  width: 335px;
+  width: 200px;
   height: 150px;
-  margin-right: 16px;
+  // margin-right: 16px;
   margin-bottom: 16px;
   display: flex;
   justify-content: center;

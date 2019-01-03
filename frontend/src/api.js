@@ -9,3 +9,12 @@ export const getUsers = () => {
 export const createUser = async (user) => {
   return axios.post(baseUri + 'users', user)
 }
+
+export const getProducts = () => {
+  return axios.get(baseUri + 'products')
+}
+
+export const createProduct = async (product) => {
+  let result = await axios.post(baseUri + 'products', product)
+  return result
+}

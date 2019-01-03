@@ -17,14 +17,14 @@ var productSchema = mongoose.Schema({
     price: {
         type: Number,
         required: true,
+        set: helper.setCredit,
         get: helper.getCredit,
-        set: helper.setCredit
     },
     purchasePrice: {
         type: Number,
         required: true,
+        set: helper.setCredit,
         get: helper.getCredit,
-        set: helper.setCredit
     },
     amount: {
         type: Number,
@@ -34,7 +34,7 @@ var productSchema = mongoose.Schema({
         type: String,
         required: false
     }
-})
+}).set('toObject', { getters: true }).set('toJSON', { getters: true })
 
 var Product = module.exports = mongoose.model('Product', productSchema)
 

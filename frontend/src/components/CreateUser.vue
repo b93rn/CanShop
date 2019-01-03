@@ -74,7 +74,7 @@ export default {
   .userForm {
     display: flex;
     flex-direction: column;
-    align-items: cneter;
+    align-items: center;
   }
   .buttons {
     display: flex;

@@ -32,6 +32,7 @@ export default {
     background-color: white;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
+    
   }
 
   .coverBackground {

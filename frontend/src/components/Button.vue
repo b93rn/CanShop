@@ -36,10 +36,17 @@ export default {
   width: 160px;
   height: 50px;
   border: none;
+  outline:none;
   border-radius: 16px;
 
   font-family: 'Roboto-Bold';
   font-size: 20px;
+  
+  button:focus{
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+  }
 }
 </style>
 

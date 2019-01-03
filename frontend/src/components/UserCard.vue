@@ -46,7 +46,7 @@ export default {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  margin-right: 16px;
+  // margin-right: 16px;
   margin-bottom: 16px;
   // temp
   border-radius: 16px;

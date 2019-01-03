@@ -21,7 +21,6 @@ exports.index = function (req, res) {
 // Handle create user actions.
 exports.new = function (req, res) {
     var user = new User()
-    // console.log(req.body)
     user.firstName = req.body.firstName
     user.lastName = req.body.lastName
     user.credit = req.body.credit ? req.body.credit : 0.00

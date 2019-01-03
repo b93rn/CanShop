@@ -1,10 +1,10 @@
 <template>
-  <div class="itemContainer" :style="style">
+  <div v-if="product" class="itemContainer" :style="style">
     <div class="left">
-      <h2>{{itemName}}</h2>
+      <h2>{{product.name}}</h2>
       <div class="numbers">
-      <h5>{{price | currency}}</h5>
-        <h5>{{quantity}}</h5>
+      <h5>{{product.price | currency}}</h5>
+        <h5>{{product.amount}}</h5>
       </div>
     </div>
     <div class="right">
@@ -13,35 +13,25 @@
   </div>
 </template>
 
-<script src="JsBarcode.all.min.js">
-JsBarcode("#barcode", "1234", {
-  format: "pharmacode",
-  lineColor: "#0aa",
-  width: 4,
-  height: 40,
-  displayValue: false
-});
-</script>
 <script>
-
-
 export default {
   name:"ItemCard",
   props: {
-    itemName: String,
-    price: Number,
-    quantity: Number,
-    color: {
-      type: String,
-      default: '#FFFFFF'
+    product: {
+      type: Object,
+      required: true
     }
   },
-  components: {
+  mounted () {
+    console.log(this.product)
   },
   computed: {
-    style () {
-      return 'background-color: ' + this.color + ';' + ' box-shadow: 1px 2px 10px 0px ' + this.color + '28;';
-
+    // If color is not defined in the DB pick white
+    color: function () {
+      return this.product.color ? this.product.color : '#FFFFFF'
+    },
+    style: function () {
+        return 'background-color: ' + this.color + ';' + ' box-shadow: 1px 2px 10px 0px ' + this.color + '28;'
     }
   }
 
@@ -50,19 +40,19 @@ export default {
 
 <style lang="scss" scoped>
 .itemContainer {
-  width: 335px;
+  width: 200px;
   height: 150px;
   padding: 16px;
-  margin-right: 16px;
+  // margin-right: 16px;
   margin-bottom: 16px;
   border-radius: 16px;
   display: flex;
   
   .left {
-    width: 25%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-grow: 1;
     .numbers {
       height: 100%;
       display: flex;
@@ -72,7 +62,7 @@ export default {
     }
   }
   .right {
-    width: 75%;
+    flex-grow: 2;
   }
   h5 {
     margin: 5px;

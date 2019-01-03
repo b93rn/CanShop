@@ -14,7 +14,7 @@ var salesSchema = mongoose.Schema({
     }
 }, {
     timestamps: true
-})
+}).set('toObject', { getters: true }).set('toJSON', { getters: true })
 
 var Sale = module.exports = mongoose.model('Sale', salesSchema)
 
