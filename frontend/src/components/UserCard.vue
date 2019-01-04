@@ -1,7 +1,8 @@
 <template>
- <div class="userContainer" v-bind:class="getBackgroundClass" @click="$emit('SelectUser')">
+ <div class="userContainer" v-bind:class="getBackgroundClass" @click="$emit('SelectUser', user)">
    <IconCard 
-    :text="getUserLetters"
+    :firstName="user.firstName"
+    :lastName="user.lastName"
    />
    <!-- temp -->
    <div>
@@ -22,9 +23,6 @@ export default {
     IconCard
   },
   computed: {
-    getUserLetters: function() {
-      return (this.user.firstName.charAt(0) + this.user.lastName.charAt(0)).toUpperCase()
-    },
     getBackgroundClass: function() {
       if(this.user.credit >= 1) {
         return 'green'

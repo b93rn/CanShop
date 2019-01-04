@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="selectorContainer">
   <div class="left">
     <div class="possitive">
       <h5>+</h5>
@@ -40,11 +40,15 @@ export default {
     isCurrency: {
       type: Boolean,
       default: true
+    },
+    startAmount: {
+      type: Number,
+      default: 0
     }
   },
   data () {
     return {
-      amount: 0.00
+      amount: this.startAmount
     }
   },
   methods: {
@@ -54,16 +58,17 @@ export default {
     },
     subtractAmount: function(number) {
       this.amount -= number
+      this.$emit('amountChanged', this.amount);
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .container {
+  .selectorContainer {
     display: flex;
     height: 190px;
-    width: 90vw;
+    width: 100;
     border-radius: 16px;
     margin-bottom: 16px;
     padding: 8px;
@@ -75,7 +80,8 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
-      flex-grow: 2;
+      width: 80%;
+      // flex-grow: 2;
       .possitive {
         display: flex;
         justify-content: space-evenly;
@@ -94,7 +100,7 @@ export default {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex-grow: 1;
+      width: 20%;
     }
   }
   .roundButton {

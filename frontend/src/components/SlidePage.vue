@@ -25,11 +25,11 @@ export default {
 
 <style lang="scss" scoped>
   .slideContainer {
-    width: 100%;
+    width: 100vw;
     height: auto;
     position: absolute;
     bottom: 0%;
-    background-color: white;
+    background-color: var(--main-bg);
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
     

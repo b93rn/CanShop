@@ -14,7 +14,8 @@ export default new Vuex.Store({
     users: [],
     products: [],
     creatingUser: false,
-    creatingProduct: false
+    creatingProduct: false,
+    selectedUser: null
   },
   mutations: {
     SET_USERS (state, users) {
@@ -34,6 +35,9 @@ export default new Vuex.Store({
     },
     ADD_PRODUCT (state, product) {
       state.products.push(product)
+    },
+    SET_USER (state, user) {
+      state.selectedUser = user
     }
   },
   actions: {

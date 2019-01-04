@@ -3,16 +3,13 @@
   <div class="home">
     <h2>Gebruikers</h2>
     <div class="userList">
-      <UserCard :v-if="users" v-for="user in users" :user="user" :key="user._id" />
+      <UserCard :v-if="users" v-for="user in users" :user="user" :key="user._id" @SelectUser="setSelectedUserInStore" />
       <div class="addUser">
         <icon-card text="+" :onClick="addUser" />
       </div>
     </div>
     <h2>Producten</h2>
     <div class="itemList">
-      <!-- <ItemCard itemName="Cola" price="0,30" quantity="37" color="#FF0741"/>
-      <ItemCard itemName="Sinas" price="0,20" quantity="21" color="#F7FF07"/>
-      <ItemCard itemName="Radler" price="0,70" quantity="9" color="#FFCD07"/> -->
       <ItemCard 
         :v-if="products"
           v-for="item in products"
@@ -26,6 +23,7 @@
   </div>
   <CreateUser />
   <CreateProduct />
+  <EditUser />
 </div>
 </template>
 
@@ -36,6 +34,7 @@ import UserCard from '../components/UserCard.vue'
 import ItemCard from '../components/ItemCard.vue'
 import CreateUser from '../components/CreateUser.vue'
 import CreateProduct from '../components/CreateProduct.vue'
+import EditUser from '../components/EditUser.vue'
 import { mapState } from 'vuex'
 
 export default {
@@ -45,7 +44,8 @@ export default {
     IconCard,
     CreateUser,
     CreateProduct,
-    ItemCard
+    ItemCard,
+    EditUser
   },
   mounted() {
     this.$store.dispatch('loadUsers')
@@ -57,6 +57,9 @@ export default {
     },
     addProduct: function() {
       this.$store.commit('TOGGLE_CREATING_PRODUCT')
+    },
+    setSelectedUserInStore: function(user) {
+      this.$store.commit('SET_USER', user)
     }
   },
   computed: {

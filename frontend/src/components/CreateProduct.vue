@@ -106,7 +106,7 @@ export default {
     align-items: center;
   }
   .quantitySelectors {
-
+    width: 100%;
   }
   .buttons {
     display: flex;
