@@ -48,18 +48,18 @@ export default {
   },
   data () {
     return {
-      amount: this.startAmount
+      amount:  Number(this.startAmount)
     }
   },
   methods: {
     addAmount: function(number) {
       this.amount += number
-      this.$emit('amountChanged', this.amount);
+      this.$emit('amountChanged', this.convertToCurrency(this.amount))
     },
     subtractAmount: function(number) {
       this.amount -= number
-      this.$emit('amountChanged', this.amount);
-    }
+      this.$emit('amountChanged', this.convertToCurrency(this.amount))
+    },
   }
 }
 </script>

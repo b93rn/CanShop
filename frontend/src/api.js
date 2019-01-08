@@ -28,4 +28,11 @@ export const createProduct = (product) => {
   return axios.post(baseUri + 'products', product)
 }
 
+export const updateProduct = (product) => {
+  return axios.put(baseUri + 'product/' + product._id, product)
+}
+
 // SALES
+export const createSale = (user, product) => {
+  return axios.post(baseUri + 'sales', { user_id: user._id, product_id: product._id })
+}

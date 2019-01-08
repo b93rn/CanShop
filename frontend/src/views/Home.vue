@@ -23,7 +23,7 @@
   </div>
   <CreateUser />
   <CreateProduct />
-  <EditUser />
+  <EditUser  v-if="selectedUser"/>
 </div>
 </template>
 
@@ -65,7 +65,8 @@ export default {
   computed: {
     ...mapState([
       'users',
-      'products'
+      'products',
+      'selectedUser'
     ])
   }
 }
@@ -99,9 +100,10 @@ export default {
    align-items: center;
  }
  .addItem {
-  width: 200px;
-  height: 150px;
+  width: 140px;
+  height: 130px;
   // margin-right: 16px;
+  padding: 16px;
   margin-bottom: 16px;
   display: flex;
   justify-content: center;

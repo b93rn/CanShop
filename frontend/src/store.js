@@ -4,7 +4,10 @@ import {
   getUsers,
   getProducts,
   createUser,
-  createProduct
+  createProduct,
+  updateUser,
+  updateProduct,
+  createSale
 } from './api'
 
 Vue.use(Vuex)
@@ -38,6 +41,20 @@ export default new Vuex.Store({
     },
     SET_USER (state, user) {
       state.selectedUser = user
+    },
+    UPDATE_USER (state, user) {
+      for (let i = 0; i < state.users.length; i++) {
+        if (state.users[i]._id === user._id) {
+          state.users[i] = user
+        }
+      }
+    },
+    UPDATE_PRODUCT (state, product) {
+      for (let i = 0; i < state.products.length; i++) {
+        if (state.products[i]._id === product._id) {
+          state.products[i] = product
+        }
+      }
     }
   },
   actions: {
@@ -61,12 +78,49 @@ export default new Vuex.Store({
     async addProduct ({ commit }, product) {
       try {
         let result = await createProduct(product)
-        console.log(result)
         commit('ADD_PRODUCT', result.data.data)
         commit('TOGGLE_CREATING_PRODUCT')
       } catch (e) {
         console.error(e)
       }
+    },
+    async updateProduct ({ commit }, product) {
+      try {
+        let result = await updateProduct(product)
+        return result.data.data
+      } catch (e) {
+        throw new Error('Updating the product has failed! ' + e)
+      }
+    },
+    async updateUser ({ commit }, user) {
+      try {
+        let result = await updateUser(user)
+        return result.data.data
+      } catch (e) {
+        throw new Error('Updating the user has failed!')
+      }
+    },
+    async buyProduct ({ commit, dispatch }, { user, product }) {
+      let updatedUser
+      let updatedProduct
+      try {
+        updatedUser = await dispatch('updateUser', user)
+        updatedProduct = await dispatch('updateProduct', product)
+      } catch (e) {
+        console.error(e)
+        return
+      }
+      // Add sale to sales history
+      try {
+        await createSale(updatedUser, updatedProduct)
+      } catch (e) {
+        console.error(e)
+        return
+      }
+      commit('UPDATE_USER', updatedUser)
+      commit('UPDATE_PRODUCT', updatedProduct)
+      // Close the Edit user page
+      commit('SET_USER', null)
     }
   }
 })

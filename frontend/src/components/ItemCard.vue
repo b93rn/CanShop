@@ -1,5 +1,5 @@
 <template>
-  <div v-if="product" class="itemContainer" :style="style">
+  <div v-if="product" class="itemContainer" :style="style" @click="$emit('itemCardClick', product)">
     <div class="left">
       <h2>{{product.name}}</h2>
       <div class="numbers">
@@ -7,9 +7,9 @@
         <h5>{{product.amount}}</h5>
       </div>
     </div>
-    <div class="right">
+    <!-- <div class="right">
       <svg id="barcode"></svg>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -23,7 +23,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.product)
   },
   computed: {
     // If color is not defined in the DB pick white
@@ -40,19 +39,22 @@ export default {
 
 <style lang="scss" scoped>
 .itemContainer {
-  width: 200px;
-  height: 150px;
+  min-width: 140px;
+  height: 130px;
   padding: 16px;
   // margin-right: 16px;
   margin-bottom: 16px;
   border-radius: 16px;
   display: flex;
+  justify-content: center;
+  
   
   .left {
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-grow: 1;
+    width: 100%;
+    // flex-grow: 1;
     .numbers {
       height: 100%;
       display: flex;
@@ -62,7 +64,7 @@ export default {
     }
   }
   .right {
-    flex-grow: 2;
+    // flex-grow: 2;
   }
   h5 {
     margin: 5px;

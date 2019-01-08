@@ -25,8 +25,8 @@ exports.new = function (req, res) {
     product.barcode = req.body.barcode
     product.price = req.body.price
     product.purchasePrice = req.body.purchasePrice
-    product.amount = req.body.amount ? req.body.amount : 0
-    product.color = req.body.color ? req.body.color : '#FFFFFF'
+    product.amount = req.body.amount !== undefined ? req.body.amount : 0
+    product.color = req.body.color !== undefined ? req.body.color : '#FFFFFF'
 
     product.save(function (err) {
         if (err) {
@@ -68,13 +68,13 @@ exports.update = function (req, res) {
                 message: err
             })
         } else {
-            product.name = req.body.name ? req.body.name : product.name
-            product.description = req.body.description ? req.body.description : product.description
-            product.barcode = req.body.barcode ? req.body.barcode : product.barcode 
-            product.price = req.body.price ? req.body.price : product.price  
-            product.purchasePrice = req.body.purchasePrice ? req.body.purchasePrice : product.purchasePrice 
-            product.amount = req.body.amount ? req.body.amount : product.amount
-            product.color = req.body.color ? req.body.color : product.color
+            product.name = req.body.name !== undefined ? req.body.name : product.name
+            product.description = req.body.description !== undefined ? req.body.description : product.description
+            product.barcode = req.body.barcode !== undefined ? req.body.barcode : product.barcode 
+            product.price = req.body.price !== undefined ? req.body.price : product.price  
+            product.purchasePrice = req.body.purchasePrice !== undefined ? req.body.purchasePrice : product.purchasePrice 
+            product.amount = req.body.amount !== undefined ? req.body.amount : product.amount
+            product.color = req.body.color !== undefined ? req.body.color : product.color
 
             product.save(function(err) {
                 if(err) {

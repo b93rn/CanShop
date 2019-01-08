@@ -16,6 +16,14 @@ Vue.filter('currency', function (value) {
   return '€' + value
 })
 
+Vue.mixin({
+  methods: {
+    convertToCurrency: function (value) {
+      return Number(parseFloat(value).toFixed(2))
+    }
+  }
+})
+
 new Vue({
   router,
   store,

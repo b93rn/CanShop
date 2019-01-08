@@ -66,8 +66,8 @@ exports.update = function(req, res) {
                 message, err
             })
         } else {
-            sale.buyer = req.body.buyer ? req.body.buyer : sale.buyer
-            sale.product = req.body.product ? req.body.product : sale.product
+            sale.buyer = req.body.buyer !== undefined ? req.body.buyer : sale.buyer
+            sale.product = req.body.product !== undefined ? req.body.product : sale.product
             
             sale.save(function(err) {
                 if(err) {

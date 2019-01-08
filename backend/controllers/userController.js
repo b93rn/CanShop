@@ -23,7 +23,7 @@ exports.new = function (req, res) {
     var user = new User()
     user.firstName = req.body.firstName
     user.lastName = req.body.lastName
-    user.credit = req.body.credit ? req.body.credit : 0.00
+    user.credit = req.body.credit !== undefined ? req.body.credit : 0.00
     user.canCount = 0
 
     user.save(function (err) {
@@ -42,7 +42,10 @@ exports.new = function (req, res) {
 exports.view = function (req, res) {
     User.findById(req.params.user_id, function (err, user) {
         if (err) {
-            res.send(err)
+            res.json({
+                status: "Error",
+                message: err
+            })
         } else {
             res.json({
                 message: "User details loading...",
@@ -58,10 +61,10 @@ exports.update = function (req, res) {
         if (err) {
             res.send(err)
         } else {
-            user.firstName = req.body.firstName ? req.body.firstName : user.firstName
-            user.lastName = req.body.lastName ? req.body.lastName : user.lastName
-            user.credit = req.body.credit ? req.body.credit : user.credit
-            user.canCount = req.body.canCount ? req.body.canCount : user.canCount
+            user.firstName = req.body.firstName !== undefined ? req.body.firstName : user.firstName
+            user.lastName = req.body.lastName !== undefined ? req.body.lastName : user.lastName
+            user.credit = req.body.credit !== undefined ? req.body.credit : user.credit
+            user.canCount = req.body.canCount !== undefined ? req.body.canCount : user.canCount
 
             // Save the user info.
             user.save(function (err) {
