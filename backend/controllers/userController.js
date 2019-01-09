@@ -91,7 +91,8 @@ exports.delete = function (req, res) {
         } else {
             res.json({
                 status: "Success",
-                message: "User has been deleted."
+                message: "User has been deleted.",
+                success: true
             })
         }
     })

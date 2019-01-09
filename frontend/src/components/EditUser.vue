@@ -30,9 +30,9 @@
         <number-selector :start-amount="convertToCurrency(selectedUser.credit)" @amountChanged="updateCredit"/>
       </div>
       <div class="buttons">
-        <Button title="Bewerken" color="blue" @onClick="test" />
+        <Button title="Bewerken" color="blue" @onClick="updateUser" />
         <Button title="Annuleren" color="yellow" @onClick="resetSelectedUser" />
-        <Button title="Verwijderen" color="red" @onClick="test" />
+        <Button title="Verwijderen" color="red" @onClick="deleteUser" />
       </div>
     </div>
   </SlidePage>
@@ -69,7 +69,7 @@ export default {
     },
     updateCredit: function(amount) {
       this.newCredit = amount
-    } ,
+    },
     buyProduct: function(product) {
       let editedUser = {}
       let editedProduct = {}
@@ -82,6 +82,18 @@ export default {
       editedProduct.amount = product.amount - 1
     
       this.$store.dispatch('buyProduct', { user: editedUser, product: editedProduct });
+    },
+    updateUser: function() {
+      let editedUser = {}
+      editedUser._id = this.selectedUser._id
+      editedUser.credit = this.convertToCurrency(this.getCurrentCredit())
+      this.$store.dispatch('updateUser', editedUser).then(user => {
+        this.$store.commit('UPDATE_USER', user)
+        this.$store.commit('SET_USER', null)
+      })
+    },
+    deleteUser: function() {
+      this.$store.dispatch('deleteUser', this.selectedUser)
     },
     // Check if the user updated his credit
     getCurrentCredit: function() {

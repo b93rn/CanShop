@@ -3,7 +3,7 @@
   <div class="home">
     <h2>Gebruikers</h2>
     <div class="userList">
-      <UserCard :v-if="users" v-for="user in users" :user="user" :key="user._id" @SelectUser="setSelectedUserInStore" />
+      <UserCard :v-if="users" v-for="user in getSortedUsers" :user="user" :key="user._id" @SelectUser="setSelectedUserInStore" />
       <div class="addUser">
         <icon-card text="+" :onClick="addUser" />
       </div>
@@ -67,7 +67,12 @@ export default {
       'users',
       'products',
       'selectedUser'
-    ])
+    ]),
+    getSortedUsers () {
+      return this.users.sort((a, b) => {
+        return b.canCount - a.canCount
+      })
+    }
   }
 }
 </script>

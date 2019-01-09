@@ -6,6 +6,7 @@ import {
   createUser,
   createProduct,
   updateUser,
+  deleteUser,
   updateProduct,
   createSale
 } from './api'
@@ -55,6 +56,13 @@ export default new Vuex.Store({
           state.products[i] = product
         }
       }
+    },
+    DELETE_USER (state, user) {
+      for (let i = 0; i < state.users.length; i++) {
+        if (state.users[i]._id === user._id) {
+          state.users.splice(i, 1)
+        }
+      }
     }
   },
   actions: {
@@ -98,6 +106,13 @@ export default new Vuex.Store({
         return result.data.data
       } catch (e) {
         throw new Error('Updating the user has failed!')
+      }
+    },
+    async deleteUser ({ commit }, user) {
+      let result = await deleteUser(user)
+      if (result.data.success) {
+        commit('DELETE_USER', user)
+        commit('SET_USER', null)
       }
     },
     async buyProduct ({ commit, dispatch }, { user, product }) {

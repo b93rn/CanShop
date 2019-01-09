@@ -43,13 +43,20 @@ export default {
   methods: {
     cancelForm: function () {
       this.$store.commit('TOGGLE_CREATING_USER')
+      this.resetForm()
     },
     submitUser: function() {
       if (this.user.firstName && this.user.lastName) {
-        this.$store.dispatch('addUser', this.user)
+        this.$store.dispatch('addUser', this.user).then(() => {
+          this.resetForm()
+        })
       } else {
         console.error('User did not fill in all of his credentials')
       }
+    },
+    resetForm: function() {
+      this.user.firstName = ''
+      this.user.lastName = ''
     }
   },
   computed: {
