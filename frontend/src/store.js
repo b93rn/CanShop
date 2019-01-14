@@ -151,6 +151,9 @@ export default new Vuex.Store({
         commit('SET_PRODUCT', null)
       }
     },
+    async refundProduct ({ commit, dispatch }, sale) {
+      // TODO: add api call en update the store.
+    },
     async buyProduct ({ commit, dispatch }, { user, product }) {
       let updatedUser
       let updatedProduct
