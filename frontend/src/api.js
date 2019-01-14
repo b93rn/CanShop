@@ -32,6 +32,10 @@ export const updateProduct = (product) => {
   return axios.put(baseUri + 'product/' + product._id, product)
 }
 
+export const deleteProduct = (product) => {
+  return axios.delete(baseUri + 'product/' + product._id)
+}
+
 // SALES
 export const createSale = (user, product) => {
   return axios.post(baseUri + 'sales', { user_id: user._id, product_id: product._id })

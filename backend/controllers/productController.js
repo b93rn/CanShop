@@ -106,7 +106,8 @@ exports.delete = function(req, res) {
         } else {
             res.json({
                 status: "Success",
-                message: "Product has been deleted."
+                message: "Product has been deleted.",
+                success: true
             })
         }
     })

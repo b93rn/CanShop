@@ -8,6 +8,7 @@ import {
   updateUser,
   deleteUser,
   updateProduct,
+  deleteProduct,
   createSale
 } from './api'
 
@@ -19,7 +20,8 @@ export default new Vuex.Store({
     products: [],
     creatingUser: false,
     creatingProduct: false,
-    selectedUser: null
+    selectedUser: null,
+    selectedProduct: null
   },
   mutations: {
     SET_USERS (state, users) {
@@ -43,6 +45,9 @@ export default new Vuex.Store({
     SET_USER (state, user) {
       state.selectedUser = user
     },
+    SET_PRODUCT (state, product) {
+      state.selectedProduct = product
+    },
     UPDATE_USER (state, user) {
       for (let i = 0; i < state.users.length; i++) {
         if (state.users[i]._id === user._id) {
@@ -61,6 +66,13 @@ export default new Vuex.Store({
       for (let i = 0; i < state.users.length; i++) {
         if (state.users[i]._id === user._id) {
           state.users.splice(i, 1)
+        }
+      }
+    },
+    DELETE_PRODUCT (state, product) {
+      for (let i = 0; i < state.products.length; i++) {
+        if (state.products[i]._id === product._id) {
+          state.products.splice(i, 1)
         }
       }
     }
@@ -113,6 +125,13 @@ export default new Vuex.Store({
       if (result.data.success) {
         commit('DELETE_USER', user)
         commit('SET_USER', null)
+      }
+    },
+    async deleteProduct ({ commit }, product) {
+      let result = await deleteProduct(product)
+      if (result.data.success) {
+        commit('DELETE_PRODUCT', product)
+        commit('SET_PRODUCT', null)
       }
     },
     async buyProduct ({ commit, dispatch }, { user, product }) {

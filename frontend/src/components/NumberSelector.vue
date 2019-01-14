@@ -42,13 +42,13 @@ export default {
       default: true
     },
     startAmount: {
-      type: Number,
+      type: [Number, String],
       default: 0
     }
   },
   data () {
     return {
-      amount:  Number(this.startAmount)
+      amount: 0
     }
   },
   methods: {
@@ -60,6 +60,9 @@ export default {
       this.amount -= number
       this.$emit('amountChanged', this.convertToCurrency(this.amount))
     },
+  },
+  created () {
+    this.amount = Number(this.startAmount)
   }
 }
 </script>

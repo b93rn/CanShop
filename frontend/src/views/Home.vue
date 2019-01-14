@@ -15,6 +15,7 @@
           v-for="item in products"
           :key="item._id"
           :product="item"
+          @itemCardClick="setSelectedProductInStore"
       />
       <div class="addItem">
         <icon-card text="+" :onClick="addProduct" />
@@ -24,6 +25,7 @@
   <CreateUser />
   <CreateProduct />
   <EditUser  v-if="selectedUser"/>
+  <editProduct v-if="selectedProduct" />
 </div>
 </template>
 
@@ -35,6 +37,7 @@ import ItemCard from '../components/ItemCard.vue'
 import CreateUser from '../components/CreateUser.vue'
 import CreateProduct from '../components/CreateProduct.vue'
 import EditUser from '../components/EditUser.vue'
+import EditProduct from '../components/EditProduct.vue'
 import { mapState } from 'vuex'
 
 export default {
@@ -45,7 +48,8 @@ export default {
     CreateUser,
     CreateProduct,
     ItemCard,
-    EditUser
+    EditUser,
+    EditProduct
   },
   mounted() {
     this.$store.dispatch('loadUsers')
@@ -60,13 +64,17 @@ export default {
     },
     setSelectedUserInStore: function(user) {
       this.$store.commit('SET_USER', user)
+    },
+    setSelectedProductInStore: function(product) {
+      this.$store.commit('SET_PRODUCT', product)
     }
   },
   computed: {
     ...mapState([
       'users',
       'products',
-      'selectedUser'
+      'selectedUser',
+      'selectedProduct'
     ]),
     getSortedUsers () {
       return this.users.sort((a, b) => {

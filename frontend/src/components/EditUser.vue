@@ -168,7 +168,6 @@ export default {
       h2 {
         margin-bottom: 8px;
       }
-
     }
     .buttons {
      display: flex;
