@@ -57,6 +57,24 @@ exports.view = function(req, res) {
     })
 }
 
+exports.getAmount = function(req, res) {
+    Sale.find().sort({ SaleId: -1}).limit(Number(req.params.amount)).populate('buyer').populate('product').exec(function (err, sales) {
+        if(err) {
+            res.json({
+                status: "Failed to get the sales data",
+                message: err,
+                success: false
+            })
+        } else {
+            res.json({
+                status: "Sales records are beign loaded",
+                success: true,
+                data: sales
+            })
+        }
+    })
+}
+
 // PUT.
 exports.update = function(req, res) {
     Sale.findById(sale.params.sale_id, function(err, sale) {

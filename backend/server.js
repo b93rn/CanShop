@@ -1,6 +1,7 @@
 let express = require('express')
 let bodyParser = require('body-parser')
 let mongoose = require('mongoose')
+// let autoIncrement = require('mongoose-auto-increment');
 
 // Init the app.
 let app = express()
@@ -16,8 +17,6 @@ app.use(bodyParser.json())
 
 // db
 mongoose.connect('mongodb://localhost/canshop')
-
-var db = mongoose.connection
 
 // Setup the port.
 const port = process.env.port || 8080
