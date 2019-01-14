@@ -40,3 +40,7 @@ export const deleteProduct = (product) => {
 export const createSale = (user, product) => {
   return axios.post(baseUri + 'sales', { user_id: user._id, product_id: product._id })
 }
+
+export const getAmountOfSales = (amount = 13) => {
+  return axios.get(baseUri + 'sales/' + amount)
+}

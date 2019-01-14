@@ -1,11 +1,24 @@
 <template>
   <div id="app">
-   <router-view/>
+    <keep-alive>
+      <router-view />
+    </keep-alive>
+    <Footer :routes="routes" />
   </div>
 </template>
 
 <script>
+import Footer from './components/Footer.vue'
+import { footerRoutes } from './router.js'
 export default {
+  components: {
+    Footer
+  },
+  data () {
+    return {
+      routes: footerRoutes
+    }
+  }
 }
 </script>
 

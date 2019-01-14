@@ -31,10 +31,12 @@ exports.new = function(req, res) {
                 errorMessage: err
             })
         } else {
-            res.json({
-                status: "Success",
-                message: "New sale created",
-                data: sale
+            Sale.findById(sale._id).populate('buyer').populate('product').exec(function(err, newSale) {
+                res.json({
+                    status: "Success",
+                    message: "New sale created",
+                    data: newSale
+                })
             })
         }
     })
@@ -45,7 +47,7 @@ exports.view = function(req, res) {
     Sale.findById(req.params.sale_id, function(err, sale) {
         if (err) {
             res.json({
-                Status: "Error",
+                Status: "Could not find the sale",
                 message: err
             })
         } else {
@@ -106,8 +108,11 @@ exports.update = function(req, res) {
 
 // DELETE.
 exports.delete = function(req, res) {
+    let updatedUser = null
+    let updatedProdct = null
+    // TODO: Get sale first before deleting 
     Sale.deleteOne({
-        _id: ReadableStream.params.sale_id
+        _id: req.params.sale_id
     }, function(err, sale) {
         if(err) {
             res.json({
@@ -115,9 +120,50 @@ exports.delete = function(req, res) {
                 message: err
             })
         } else {
-            res.json({
-                status: "Success",
-                message: "The sale has been deleted"
+            console.log(sale)
+            Product.findById(sale.product, function(err, product) {
+                if(err) {
+                    console.log('could not find the product')
+                } else {
+                    console.log(product)
+                    product.amount++
+                    product.save(function(err) {
+                        if(!err) {
+                            updatedProdct = product
+                            User.findById(sale.buyer, function(err, user) {
+                                if(err) {
+                                    console.log('could not find the user')
+                                } else {
+                                    user.canCount -= 1
+                                    user.credit += updatedProdct.price
+                                    user.save(function(err) {
+                                        if(!err) {
+                                            updatedUser = user
+                                            res.json({
+                                                status: "Succefully refunded the product",
+                                                success: true,
+                                                data: {
+                                                    updatedUser,
+                                                    updatedProdct
+                                                }
+                                            })
+                                        } else {
+                                            res.json({
+                                                status: "Could no refund the product",
+                                                success: false
+                                            })
+                                        }
+                                    })
+                                }
+                            })
+                        } else {
+                            res.json({
+                                status: "Could no refund the product",
+                                success: false
+                            })
+                        }
+                    })
+                }
             })
         }
     })

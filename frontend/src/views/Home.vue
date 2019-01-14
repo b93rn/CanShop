@@ -54,6 +54,7 @@ export default {
   mounted() {
     this.$store.dispatch('loadUsers')
     this.$store.dispatch('loadProducts')
+    this.$store.dispatch('loadSales')
   },
   methods: {
     addUser: function() {

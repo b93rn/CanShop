@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import {
   getUsers,
   getProducts,
+  getAmountOfSales,
   createUser,
   createProduct,
   updateUser,
@@ -18,10 +19,16 @@ export default new Vuex.Store({
   state: {
     users: [],
     products: [],
+    sales: [],
     creatingUser: false,
     creatingProduct: false,
     selectedUser: null,
     selectedProduct: null
+  },
+  getters: {
+    slidePageIsActive: state => {
+      return (state.creatingUser || state.creatingProduct || state.selectedUser || state.selectedProduct) ? true : false
+    }
   },
   mutations: {
     SET_USERS (state, users) {
@@ -29,6 +36,9 @@ export default new Vuex.Store({
     },
     SET_PRODUCTS (state, products) {
       state.products = products
+    },
+    SET_SALES (state, sales) {
+      state.sales = sales
     },
     TOGGLE_CREATING_USER (state) {
       state.creatingUser = !state.creatingUser
@@ -41,6 +51,9 @@ export default new Vuex.Store({
     },
     ADD_PRODUCT (state, product) {
       state.products.push(product)
+    },
+    ADD_SALE (state, sale) {
+      state.sales.unshift(sale)
     },
     SET_USER (state, user) {
       state.selectedUser = user
@@ -85,6 +98,10 @@ export default new Vuex.Store({
     async loadProducts ({ commit }) {
       let result = await getProducts()
       commit('SET_PRODUCTS', result.data.data)
+    },
+    async loadSales ({ commit }) {
+      let result = await getAmountOfSales()
+      commit('SET_SALES', result.data.data)
     },
     async addUser ({ commit }, user) {
       try {
@@ -137,6 +154,7 @@ export default new Vuex.Store({
     async buyProduct ({ commit, dispatch }, { user, product }) {
       let updatedUser
       let updatedProduct
+      let saleResult
       try {
         updatedUser = await dispatch('updateUser', user)
         updatedProduct = await dispatch('updateProduct', product)
@@ -146,13 +164,14 @@ export default new Vuex.Store({
       }
       // Add sale to sales history
       try {
-        await createSale(updatedUser, updatedProduct)
+        saleResult = await createSale(updatedUser, updatedProduct)
       } catch (e) {
         console.error(e)
         return
       }
       commit('UPDATE_USER', updatedUser)
       commit('UPDATE_PRODUCT', updatedProduct)
+      commit('ADD_SALE', saleResult.data.data)
       // Close the Edit user page
       commit('SET_USER', null)
     }
