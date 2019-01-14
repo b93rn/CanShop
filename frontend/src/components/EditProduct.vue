@@ -8,16 +8,16 @@
         <input type="text" placeholder="Kleur bijvoorbeeld: #FFFFFF" v-model="product.color">
       </div>
       <div class="selector">
-        <NumberSelector v-if="product.price"
+        <NumberSelector v-if="product.price !== undefined"
           title="Bedrag" @amountChanged="setPrice" 
           :start-amount="product.price" 
         />
-        <NumberSelector v-if="product.purchasePrice"
+        <NumberSelector v-if="product.purchasePrice !== undefined"
           title="Inkoop" 
           @amountChanged="setPurchasePrice" 
           :start-amount="product.purchasePrice"
         />
-        <NumberSelector v-if="product.amount"
+        <NumberSelector v-if="product.amount !== undefined"
           title="Aantal" 
           @amountChanged="setAmount" 
           :start-amount="product.amount" 
