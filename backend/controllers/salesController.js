@@ -112,13 +112,11 @@ exports.update = function(req, res) {
 
 // DELETE + refund user/product
 exports.delete = function (req, res) {
-    let user = null
-    let product = null
     Sale.findById(req.params.sale_id, async function (err, sale) {
         if (!err && sale) {
             try {
-                user = await User.findById(sale.buyer)
-                product = await Product.findById(sale.product)
+                let user = await User.findById(sale.buyer)
+                let product = await Product.findById(sale.product)
 
                 // Refund the user
                 user.credit = Number(user.credit) + Number(product.price)
