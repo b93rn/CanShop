@@ -20,7 +20,8 @@ export default {
   },
   methods: {
     removeSale: function() {
-      console.log('remove this fcking sale')
+      console.log('REMOVE')
+      this.$store.dispatch('refundProduct', this.sale)
     }
   },
   computed: {

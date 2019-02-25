@@ -10,7 +10,8 @@ import {
   deleteUser,
   updateProduct,
   deleteProduct,
-  createSale
+  createSale,
+  refundSale
 } from './api'
 
 Vue.use(Vuex)
@@ -88,6 +89,13 @@ export default new Vuex.Store({
           state.products.splice(i, 1)
         }
       }
+    },
+    DELETE_SALE (state, saleId) {
+      for (let i = 0; i < state.sales.length; i++) {
+        if (state.sales[i]._id === saleId) {
+          state.sales.splice(i, 1)
+        }
+      }
     }
   },
   actions: {
@@ -151,8 +159,21 @@ export default new Vuex.Store({
         commit('SET_PRODUCT', null)
       }
     },
-    async refundProduct ({ commit, dispatch }, sale) {
-      // TODO: add api call en update the store.
+    async refundProduct ({
+      commit
+    }, sale) {
+      try {
+        let result = await refundSale(sale)
+        console.log(result.data.success)
+        if (result.data.success) {
+          commit('UPDATE_USER', result.data.data.user)
+          commit('UPDATE_PRODUCT', result.data.data.product)
+          console.log('Jaja')
+          commit('DELETE_SALE', result.data.data.id)
+        }
+      } catch (err) {
+        console.error(err)
+      }
     },
     async buyProduct ({ commit, dispatch }, { user, product }) {
       let updatedUser

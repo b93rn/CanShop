@@ -45,3 +45,7 @@ export const createSale = (user, product) => {
 export const getAmountOfSales = (amount = 13) => {
   return axios.get(baseUri + 'sales/' + amount)
 }
+
+export const refundSale = (sale) => {
+  return axios.delete(baseUri + 'sale/' + sale._id)
+}
