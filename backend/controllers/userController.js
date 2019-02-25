@@ -2,7 +2,9 @@ User = require('../models/userModel')
 
 // Handle index actions.
 exports.index = function (req, res) {
-    User.get(function (err, users) {
+    User.find({
+        deleted: false
+    }).exec(function (err, users) {
         if (err) {
             res.json({
                 status: "Error",
@@ -22,7 +24,7 @@ exports.index = function (req, res) {
 exports.new = function (req, res) {
     var user = new User()
     user.firstName = req.body.firstName
-    user.lastName = req.body.lastName
+    user.lastName = req.body.lastNam
     user.credit = req.body.credit !== undefined ? req.body.credit : 0.00
     user.canCount = 0
 
@@ -40,7 +42,9 @@ exports.new = function (req, res) {
 
 //  Handle get by id.
 exports.view = function (req, res) {
-    User.findById(req.params.user_id, function (err, user) {
+    User.find({
+        deleted: false
+    }).findById(req.params.user_id, function (err, user) {
         if (err) {
             res.json({
                 status: "Error",
@@ -83,17 +87,26 @@ exports.update = function (req, res) {
 
 // Handle user delete
 exports.delete = function (req, res) {
-    User.deleteOne({
-        _id: req.params.user_id
-    }, function (err, user) {
+    User.findById(req.params.user_id, function (err, user) {
         if (err) {
             res.send(err)
         } else {
-            res.json({
-                status: "Success",
-                message: "User has been deleted.",
-                success: true
+            user.deleted = true;
+            user.save(function(err) {
+                if(err) {
+                    res.json({
+                        status: "Error",
+                        message: err
+                    })
+                } else {
+                    res.json({
+                        status: "Success",
+                        message: "User has been deleted.",
+                        success: true
+                    })
+                }
             })
+            
         }
     })
 }

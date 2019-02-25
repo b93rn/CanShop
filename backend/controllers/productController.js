@@ -1,7 +1,9 @@
 Product = require('../models/productModel')
 
 exports.index = function (req, res) {
-    Product.get(function (err, products) {
+    Product.find({
+        deleted: false
+    }).exec(function(err, products) {
         if (err) {
             res.json({
                 status: "Error",
@@ -15,7 +17,8 @@ exports.index = function (req, res) {
             })
         }
     })
-}
+ }
+
 
 // Post.
 exports.new = function (req, res) {
@@ -44,7 +47,9 @@ exports.new = function (req, res) {
 
 // GET.
 exports.view = function (req, res) {
-    Product.findById(req.params.product_id, function (err, product) {
+    User.find({
+        deleted: false
+    }).findById(req.params.product_id, function (err, product) {
         if (err) {
             res.json({
                 Status: "Error",
@@ -95,19 +100,28 @@ exports.update = function (req, res) {
 
 // DELETE
 exports.delete = function(req, res) {
-    Product.deleteOne({
-        _id: req.params.product_id
-    }, function(err, product) {
+    Product.findById(req.params.product_id, function(err, product) {
         if(err) {
             res.json({
                 status: "Error",
                 message: err
             })
         } else {
-            res.json({
-                status: "Success",
-                message: "Product has been deleted.",
-                success: true
+            product.deleted = true;
+            product.save(function(err) {
+                if(err) {
+                    res.json({
+                        status: "Error",
+                        message: err
+                    })
+                } else {
+                    console.log("Jaja is verwijderd")
+                    res.json({
+                        status: "Success",
+                        message: "Product has been deleted.",
+                        success: true
+                    })
+                } 
             })
         }
     })

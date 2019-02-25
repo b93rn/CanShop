@@ -1,5 +1,8 @@
 Sale = require('../models/salesModel')
+User = require('../models/userModel')
+Product = require('../models/productModel')
 
+// TODO: remove populate
 exports.index = function (req, res) {
     Sale.find().populate('buyer').populate('product').exec(function(err, sales) {
         if (err) {
@@ -18,6 +21,7 @@ exports.index = function (req, res) {
 }
 
 // POST.
+// TODO: Get buyer en product from db and make the copy
 exports.new = function(req, res) {
     var sale = new Sale()
     sale.buyer = req.body.user_id,
@@ -106,65 +110,50 @@ exports.update = function(req, res) {
     })
 }
 
-// DELETE.
-exports.delete = function(req, res) {
-    let updatedUser = null
-    let updatedProdct = null
-    // TODO: Get sale first before deleting 
-    Sale.deleteOne({
-        _id: req.params.sale_id
-    }, function(err, sale) {
-        if(err) {
-            res.json({
-                status: "Error",
-                message: err
-            })
-        } else {
-            console.log(sale)
-            Product.findById(sale.product, function(err, product) {
-                if(err) {
-                    console.log('could not find the product')
-                } else {
-                    console.log(product)
-                    product.amount++
-                    product.save(function(err) {
-                        if(!err) {
-                            updatedProdct = product
-                            User.findById(sale.buyer, function(err, user) {
-                                if(err) {
-                                    console.log('could not find the user')
-                                } else {
-                                    user.canCount -= 1
-                                    user.credit += updatedProdct.price
-                                    user.save(function(err) {
-                                        if(!err) {
-                                            updatedUser = user
-                                            res.json({
-                                                status: "Succefully refunded the product",
-                                                success: true,
-                                                data: {
-                                                    updatedUser,
-                                                    updatedProdct
-                                                }
-                                            })
-                                        } else {
-                                            res.json({
-                                                status: "Could no refund the product",
-                                                success: false
-                                            })
-                                        }
-                                    })
-                                }
-                            })
-                        } else {
-                            res.json({
-                                status: "Could no refund the product",
-                                success: false
-                            })
-                        }
-                    })
-                }
-            })
+// DELETE + refund user/product
+exports.delete = function (req, res) {
+    let user = null
+    let product = null
+    Sale.findById(req.params.sale_id, async function (err, sale) {
+        if (!err && sale) {
+            try {
+                user = await User.findById(sale.buyer)
+                product = await Product.findById(sale.product)
+
+                // Refund the user
+                user.credit = Number(user.credit) + Number(product.price)
+                user.canCount--
+                
+                // Restore Product 
+                product.amount++
+
+                // Save the user and the product
+                await user.save()
+                await product.save()
+
+                // delete the sale
+                await sale.delete()        
+
+                // Send to updated user and product to the frontend
+                res.json({
+                    message: "Sale succesfully deleted.",
+                    data: {
+                        id: req.params.sale_id,
+                        user,
+                        product
+                    },
+                    success: true
+                })
+                return;
+            }
+            catch(err) {
+                console.error(err)
+            }
         }
+        res.json({
+            status: "Oops, something went wrong.",
+            message: err,
+            success: false
+        })
     })
 }

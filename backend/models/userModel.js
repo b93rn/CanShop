@@ -19,6 +19,10 @@ var userSchema = mongoose.Schema({
     canCount: {
         type: Number,
         required: true
+    },
+    deleted: {
+        type: Boolean,
+        default: false
     }
 }).set('toObject', { getters: true }).set('toJSON', { getters: true })
 

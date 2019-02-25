@@ -33,6 +33,10 @@ var productSchema = mongoose.Schema({
     color: {
         type: String,
         required: false
+    },
+    deleted: {
+        type: Boolean,
+        default: false
     }
 }).set('toObject', { getters: true }).set('toJSON', { getters: true })
 
