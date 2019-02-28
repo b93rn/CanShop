@@ -115,7 +115,6 @@ exports.delete = function(req, res) {
                         message: err
                     })
                 } else {
-                    console.log("Jaja is verwijderd")
                     res.json({
                         status: "Success",
                         message: "Product has been deleted.",

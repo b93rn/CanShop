@@ -58,15 +58,12 @@ export default {
   },
   methods: {
     setPrice: function(price) {
-      console.log(price)
       this.product.price = price
     },
     setPurchasePrice: function(price) {
-      console.log(price)
       this.product.purchasePrice = price
     },
     setAmount: function(amount) {
-      console.log(amount)
       this.product.amount = amount
     },
     updateProduct: function () {

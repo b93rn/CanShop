@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <keep-alive>
+      <transition name="slide">
       <router-view />
+      </transition>
     </keep-alive>
     <Footer :routes="routes" />
   </div>
@@ -36,5 +38,16 @@ body {
   background-color: var(--main-bg);
   color: var(--main-black);
   overflow: hidden;
+}
+
+.slide-enter-active {
+  transition: all 0.3s ease-out;
+}
+.slide-leave-active {
+  transition: all 0.1s ease-in;
+}
+.slide-enter, .slide-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(100%);
 }
 </style>

@@ -64,9 +64,6 @@ export default {
     resetSelectedUser: function() {
       this.$store.commit('SET_USER', null)
     },
-    test: function() {
-      console.log('test...')
-    },
     updateCredit: function(amount) {
       this.newCredit = amount
     },

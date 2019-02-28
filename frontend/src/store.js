@@ -164,11 +164,9 @@ export default new Vuex.Store({
     }, sale) {
       try {
         let result = await refundSale(sale)
-        console.log(result.data.success)
         if (result.data.success) {
           commit('UPDATE_USER', result.data.data.user)
           commit('UPDATE_PRODUCT', result.data.data.product)
-          console.log('Jaja')
           commit('DELETE_SALE', result.data.data.id)
         }
       } catch (err) {

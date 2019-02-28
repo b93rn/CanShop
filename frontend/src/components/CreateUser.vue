@@ -36,7 +36,8 @@ export default {
     return {
       user: {
         firstName: '',
-        lastName: ''
+        lastName: '',
+        deleted: false
       }
     }
   },
