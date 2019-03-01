@@ -1,7 +1,6 @@
 import axios from 'axios'
 
-// const baseUri = 'http://localhost:8080/api/'
-const baseUri = 'http://192.168.1.25:8080/api/'
+const baseUri = 'http://localhost:8080/api/'
 
 // USERS
 export const getUsers = () => {
