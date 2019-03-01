@@ -24,10 +24,9 @@ exports.index = function (req, res) {
 exports.new = function (req, res) {
     var user = new User()
     user.firstName = req.body.firstName
-    user.lastName = req.body.lastNam
+    user.lastName = req.body.lastName
     user.credit = req.body.credit !== undefined ? req.body.credit : 0.00
     user.canCount = 0
-
     user.save(function (err) {
         if (err) {
             res.json(err)
