@@ -29,6 +29,9 @@ export default new Vuex.Store({
   getters: {
     slidePageIsActive: state => {
       return (state.creatingUser || state.creatingProduct || state.selectedUser || state.selectedProduct) ? true : false
+    },
+    getMinAmountOfSales: (state, amount) => {
+      return state.sales
     }
   },
   mutations: {

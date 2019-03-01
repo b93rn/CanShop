@@ -8,24 +8,18 @@
         <icon-card text="+" :onClick="addUser" />
       </div>
     </div>
-    <h2>Producten</h2>
-    <div class="itemList">
-      <ItemCard 
-        :v-if="products"
-          v-for="item in products"
-          :key="item._id"
-          :product="item"
-          @itemCardClick="setSelectedProductInStore"
+    <h2>Recent Verkocht</h2>
+    <div class="salesList">
+      <!-- getMinAmountOfSales -->
+      <SaleItem 
+        v-for="sale in this.$store.getters.getMinAmountOfSales"
+        :key="sale._id"
+        :sale="sale"
       />
-      <div class="addItem">
-        <icon-card text="+" :onClick="addProduct" />
-      </div>
     </div>
   </div>
   <CreateUser />
-  <CreateProduct />
   <EditUser  v-if="selectedUser"/>
-  <editProduct v-if="selectedProduct" />
 </div>
 </template>
 
@@ -33,11 +27,9 @@
 // import Button from '../components/Button.vue'
 import IconCard from '../components/IconCard.vue'
 import UserCard from '../components/UserCard.vue'
-import ItemCard from '../components/ItemCard.vue'
 import CreateUser from '../components/CreateUser.vue'
-import CreateProduct from '../components/CreateProduct.vue'
 import EditUser from '../components/EditUser.vue'
-import EditProduct from '../components/EditProduct.vue'
+import SaleItem from '../components/SaleItem.vue'
 import { mapState } from 'vuex'
 
 export default {
@@ -46,10 +38,8 @@ export default {
     UserCard,
     IconCard,
     CreateUser,
-    CreateProduct,
-    ItemCard,
     EditUser,
-    EditProduct
+    SaleItem
   },
   mounted() {
     this.$store.dispatch('loadUsers')
@@ -60,14 +50,8 @@ export default {
     addUser: function() {
       this.$store.commit('TOGGLE_CREATING_USER')
     },
-    addProduct: function() {
-      this.$store.commit('TOGGLE_CREATING_PRODUCT')
-    },
     setSelectedUserInStore: function(user) {
       this.$store.commit('SET_USER', user)
-    },
-    setSelectedProductInStore: function(product) {
-      this.$store.commit('SET_PRODUCT', product)
     }
   },
   computed: {
@@ -99,9 +83,9 @@ export default {
    justify-content: space-between;
    flex-wrap: wrap;
  }
- .itemList{
+ .salesList{
    display: flex;
-   flex-direction: row;
+   flex-direction: column;
    justify-content: space-between;
   //  align-content: stretch;
    flex-wrap: wrap;

@@ -36,8 +36,7 @@ export default {
     return {
       user: {
         firstName: '',
-        lastName: '',
-        deleted: false
+        lastName: ''
       }
     }
   },
@@ -48,6 +47,7 @@ export default {
     },
     submitUser: function() {
       if (this.user.firstName && this.user.lastName) {
+        console.log(this.user)
         this.$store.dispatch('addUser', this.user).then(() => {
           this.resetForm()
         })
