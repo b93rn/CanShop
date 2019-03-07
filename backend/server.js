@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 
 // db
-mongoose.connect('mongodb://localhost/canshop')
+mongoose.connect('mongodb://mongo:27017/canshop')
 
 // Setup the port.
 const port = process.env.port || 8080
