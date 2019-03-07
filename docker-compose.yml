@@ -1,19 +1,22 @@
 version: '3'
 services:
-  frontend:
-    build: ./frontend
+  mongo:
+    image: mongo
+    restart: always
+    volumes:
+      - ./localFolder:/data/db
     ports:
-      - '8081:80'
-    # links:
-    #   - backend
+      - '27017:27017'
   backend:
     restart: always
     build: ./backend
     ports:
       - '8080:8080'
-    # links:
-      # - mongo
-  mongo:
-    image: mongo
+    links:
+      - mongo
+  frontend:
+    build: ./frontend
     ports:
-      - '27017:27017'
+      - '8081:80'
+    links:
+      - backend
