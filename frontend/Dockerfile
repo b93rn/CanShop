@@ -1,5 +1,12 @@
 # build stage
-FROM node:lts-alpine as build-stage
+FROM debian:stable as build-stage
+
+RUN apt-get update
+RUN apt-get install -y curl
+RUN apt-get install -y gnupg
+RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
+RUN apt-get install -y nodejs
+
 COPY package*.json ./
 RUN npm install
 COPY . .
