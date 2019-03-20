@@ -1,7 +1,6 @@
-let express = require('express')
-let bodyParser = require('body-parser')
-let mongoose = require('mongoose')
-// let autoIncrement = require('mongoose-auto-increment');
+let express = require('express');
+let bodyParser = require('body-parser');
+let Sequelize = require('sequalize');
 
 // Init the app.
 let app = express()
@@ -16,8 +15,9 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 
 // db
-mongoose.connect('mongodb://mongo:27017/canshop')
-
+const sequelize = new Sequelize('canshop', 'postgres', '', {
+    dialect: 'postgres'
+  });
 // Setup the port.
 const port = process.env.port || 8080
 
