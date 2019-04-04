@@ -1,6 +1,14 @@
-import { sequelize, Sequelize } from 'sequelize';
+const {
+  Sequelize,
+  Model
+} = require('sequelize');
+const sequelize = require('../database');
 
-const User = sequelize.define('user', {
+class User extends Model {
+
+}
+
+User.init({
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -8,11 +16,11 @@ const User = sequelize.define('user', {
   },
   firstName: {
     type: Sequelize.STRING,
-    allowNull: false,  
+    allowNull: false,
   },
   lastName: {
     type: Sequelize.STRING,
-    allowNull: false,  
+    allowNull: false,
   },
   credit: {
     type: Sequelize.DECIMAL
@@ -20,6 +28,8 @@ const User = sequelize.define('user', {
   canCount: {
     type: Sequelize.INTEGER
   }
+}, {
+  sequelize
 });
 
-export default User;
+module.exports = User;

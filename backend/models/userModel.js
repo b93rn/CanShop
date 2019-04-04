@@ -8,7 +8,7 @@ var userSchema = mongoose.Schema({
     },
     lastName: {
         type: String,
-        required: true
+    required: true
     },
     credit: {
         type: Number,

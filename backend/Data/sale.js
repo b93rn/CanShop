@@ -1,14 +1,15 @@
-import { sequelize, Sequelize } from 'sequelize';
-import Product from './product';
+const { Sequelize, Model } = require('sequelize');
+const sequelize = require('../database');
+const Product = require('./product');
+const User = require('./user');
 
-const Sale = sequelize.define('sale', {
-  id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
+class Sale extends Model {
+
+}
+
+Sale.init({
   user_id: {
-    allowNull: false,  
+    type: Sequelize.INTEGER, 
     references: {
       model: User,
       key: 'id',
@@ -16,14 +17,13 @@ const Sale = sequelize.define('sale', {
     }
   },
   product_id: {
-    allowNull: false,  
-    
+    type: Sequelize.INTEGER, 
     references: {
       model: Product,
       key: 'id',
       deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
     }
   }
-});
+}, { sequelize });
 
-export default Sale;
+module.exports = Sale;

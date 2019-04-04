@@ -1,11 +1,11 @@
-import { sequelize, Sequelize } from 'sequelize';
+const { Sequelize, Model } = require('sequelize');
+const sequelize = require('../database');
 
-const Product = sequelize.define('product', {
-  id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
+class Product extends Model {
+
+}
+
+Product.init({
   description: {
     type: Sequelize.STRING
   },
@@ -27,6 +27,6 @@ const Product = sequelize.define('product', {
     type: Sequelize.STRING,
     defaultValue: '#ffffff'
   }
-});
+}, {sequelize} );
 
-export default Product;
+module.exports = Product;
