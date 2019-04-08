@@ -1,111 +1,94 @@
-User = require('../models/userModel')
+const User = require('../data/user');
 
 // Handle index actions.
 exports.index = function (req, res) {
-    User.find({
-        deleted: false
-    }).exec(function (err, users) {
-        if (err) {
-            res.json({
-                status: "Error",
-                message: err
-            })
-        } else {
-            res.json({
-                status: "Success",
-                message: "Users retrieved succesfully",
-                data: users
-            })
-        }
+  User.findAll().then(users => {
+    res.json({
+      status: "Success",
+      message: "Users retrieved succesfully",
+      data: users
     })
+  }).catch(err => {
+    res.json({
+      status: "Error",
+      message: err
+    })
+  });
 }
 
-// Handle create user actions.
-exports.new = function (req, res) {
-    var user = new User()
-    user.firstName = req.body.firstName
-    user.lastName = req.body.lastName
-    user.credit = req.body.credit !== undefined ? req.body.credit : 0.00
-    user.canCount = 0
-    user.save(function (err) {
-        if (err) {
-            res.json(err)
-        } else {
-            res.json({
-                message: "New user created",
-                data: user
-            })
-        }
-    })
-}
+  // Handle create user actions.
+  exports.new = function (req, res) {
+    User.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      credit: req.body.credit !== undefined ? req.body.canCount : 0.00,
+      canCount: 0
+    }).then(user => {
+      console.log(user)
+      res.json({
+        message: "New user created",
+        data: user
+      })
+    }).catch(err => {
+      res.json(err);
+    });
+  }
 
-//  Handle get by id.
-exports.view = function (req, res) {
-    User.find({
-        deleted: false
-    }).findById(req.params.user_id, function (err, user) {
-        if (err) {
-            res.json({
-                status: "Error",
-                message: err
-            })
-        } else {
-            res.json({
-                message: "User details loading...",
-                data: user
-            })
-        }
-    })
-}
+  //  Handle get b.id. 
+  exports.view = function (req, res) {
+    User.findAll({
+      where: {
+      .id: req.params.use.id
+      }
+    }).then(user => {
+      res.json({
+        message: "User details loading...",
+        data: user
+      })
+    }).catch(err => {
+      res.json({
+        status: "Error",
+        message: err
+      })
+    });
+  }
 
-// Hand put request.
-exports.update = function (req, res) {
-    User.findById(req.params.user_id, function (err, user) {
-        if (err) {
-            res.send(err)
-        } else {
-            user.firstName = req.body.firstName !== undefined ? req.body.firstName : user.firstName
-            user.lastName = req.body.lastName !== undefined ? req.body.lastName : user.lastName
-            user.credit = req.body.credit !== undefined ? req.body.credit : user.credit
-            user.canCount = req.body.canCount !== undefined ? req.body.canCount : user.canCount
-
-            // Save the user info.
-            user.save(function (err) {
-                if (err) {
-                    res.json(err)
-                } else {
-                    res.json({
-                        message: "User info updated",
-                        data: user
-                    })
-                }
-            })
+    // Hand put request. 
+    exports.update = function (req, res) {
+      User.update({
+          firstName: req.body.firstName !== undefined ? req.body.firstName : User.firstName,
+          lastName: req.body.lastName !== undefined ? req.body.lastName : User.lastName,
+          credit: req.body.credit !== undefined ? req.body.credit : User.credit,
+          canCount: req.body.canCount !== undefined ? req.body.canCount : User.canCount
+        }, {
+          where: {
+          .id: req.params.use.id
+          }
         }
-    })
-}
+      ).then(user => {
+        res.json({
+          message: "User details updating...",
+          data: user
+        })
+      }).catch(err => {
+        res.json({
+          status: "Error updating user.",
+          message: err
+        })
+      });
+    }
 
 // Handle user delete
 exports.delete = function (req, res) {
-    User.findById(req.params.user_id, function (err, user) {
-        if (err) {
-            res.send(err)
-        } else {
-            user.deleted = true;
-            user.save(function(err) {
-                if(err) {
-                    res.json({
-                        status: "Error",
-                        message: err
-                    })
-                } else {
-                    res.json({
-                        status: "Success",
-                        message: "User has been deleted.",
-                        success: true
-                    })
-                }
-            })
-            
-        }
-    })
+  User.destroy({where: {
+  .id: req.params.use.id
+  }}).then(user => {
+    res.json({
+      status: "Success",
+      message: "User has been deleted.",
+      success: true
+    });
+  }).catch(err => {
+    res.send(err);
+  });
 }
