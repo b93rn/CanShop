@@ -12,11 +12,11 @@ export const createUser = (user) => {
 }
 
 export const updateUser = (user) => {
-  return axios.put(baseUri + 'user/' + user._id, user)
+  return axios.put(baseUri + 'user/' + user.id, user)
 }
 
 export const deleteUser = (user) => {
-  return axios.delete(baseUri + 'user/' + user._id)
+  return axios.delete(baseUri + 'user/' + user.id)
 }
 
 // PRODUCTS
@@ -29,16 +29,16 @@ export const createProduct = (product) => {
 }
 
 export const updateProduct = (product) => {
-  return axios.put(baseUri + 'product/' + product._id, product)
+  return axios.put(baseUri + 'product/' + product.id, product)
 }
 
 export const deleteProduct = (product) => {
-  return axios.delete(baseUri + 'product/' + product._id)
+  return axios.delete(baseUri + 'product/' + product.id)
 }
 
 // SALES
 export const createSale = (user, product) => {
-  return axios.post(baseUri + 'sales', { user_id: user._id, product_id: product._id })
+  return axios.post(baseUri + 'sales', { user_id: user.id, product_id: product.id })
 }
 
 export const getAmountOfSales = (amount = 13) => {
@@ -46,5 +46,5 @@ export const getAmountOfSales = (amount = 13) => {
 }
 
 export const refundSale = (sale) => {
-  return axios.delete(baseUri + 'sale/' + sale._id)
+  return axios.delete(baseUri + 'sale/' + sale.id)
 }

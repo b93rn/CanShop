@@ -5,7 +5,7 @@
       <ItemCard 
         :v-if="products"
           v-for="item in products"
-          :key="item._id"
+          :key="item.id"
           :product="item"
           @itemCardClick="setSelectedProductInStore"
       />

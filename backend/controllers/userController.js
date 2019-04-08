@@ -24,7 +24,6 @@ exports.index = function (req, res) {
       credit: req.body.credit !== undefined ? req.body.canCount : 0.00,
       canCount: 0
     }).then(user => {
-      console.log(user)
       res.json({
         message: "New user created",
         data: user
@@ -38,7 +37,7 @@ exports.index = function (req, res) {
   exports.view = function (req, res) {
     User.findAll({
       where: {
-      id: req.params.user.id
+      id: req.params.user_id
       }
     }).then(user => {
       res.json({
@@ -62,13 +61,15 @@ exports.index = function (req, res) {
           canCount: req.body.canCount !== undefined ? req.body.canCount : User.canCount
         }, {
           where: {
-          id: req.params.user.id
-          }
+            id: req.params.user_id
+          },
+          returning: true
+          
         }
       ).then(user => {
         res.json({
           message: "User details updating...",
-          data: user
+          data: user[1][0].dataValues
         })
       }).catch(err => {
         res.json({
@@ -81,7 +82,7 @@ exports.index = function (req, res) {
 // Handle user delete
 exports.delete = function (req, res) {
   User.destroy({where: {
-  id: req.params.user.id
+  id: req.params.user_id
   }}).then(user => {
     res.json({
       status: "Success",

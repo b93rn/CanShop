@@ -35,7 +35,7 @@ exports.new = function(req, res) {
                 errorMessage: err
             })
         } else {
-            Sale.findById(sale._id).populate('buyer').populate('product').exec(function(err, newSale) {
+            Sale.findById(sale.id).populate('buyer').populate('product').exec(function(err, newSale) {
                 res.json({
                     status: "Success",
                     message: "New sale created",

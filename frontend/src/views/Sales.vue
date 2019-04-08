@@ -3,7 +3,7 @@
     <h2>Verkoop geschiedenis</h2>
     <SaleItem 
       v-for="sale in sales"
-      :key="sale._id"
+      :key="sale.id"
       :sale="sale"
     />
   </div>

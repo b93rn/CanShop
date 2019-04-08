@@ -67,35 +67,35 @@ export default new Vuex.Store({
     },
     UPDATE_USER (state, user) {
       for (let i = 0; i < state.users.length; i++) {
-        if (state.users[i]._id === user._id) {
+        if (state.users[i].id === user.id) {
           state.users[i] = user
         }
       }
     },
     UPDATE_PRODUCT (state, product) {
       for (let i = 0; i < state.products.length; i++) {
-        if (state.products[i]._id === product._id) {
+        if (state.products[i].id === product.id) {
           state.products[i] = product
         }
       }
     },
     DELETE_USER (state, user) {
       for (let i = 0; i < state.users.length; i++) {
-        if (state.users[i]._id === user._id) {
+        if (state.users[i].id === user.id) {
           state.users.splice(i, 1)
         }
       }
     },
     DELETE_PRODUCT (state, product) {
       for (let i = 0; i < state.products.length; i++) {
-        if (state.products[i]._id === product._id) {
+        if (state.products[i].id === product.id) {
           state.products.splice(i, 1)
         }
       }
     },
     DELETE_SALE (state, saleId) {
       for (let i = 0; i < state.sales.length; i++) {
-        if (state.sales[i]._id === saleId) {
+        if (state.sales[i].id === saleId) {
           state.sales.splice(i, 1)
         }
       }

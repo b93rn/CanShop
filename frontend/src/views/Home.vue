@@ -3,7 +3,7 @@
   <div class="home">
     <h2>Gebruikers</h2>
     <div class="userList">
-      <UserCard :v-if="users" v-for="user in getSortedUsers" :user="user" :key="user._id" @SelectUser="setSelectedUserInStore" />
+      <UserCard :v-if="users" v-for="user in getSortedUsers" :user="user" :key="user.id" @SelectUser="setSelectedUserInStore" />
       <div class="addUser">
         <icon-card text="+" :onClick="addUser" />
       </div>
@@ -13,7 +13,7 @@
       <!-- getMinAmountOfSales -->
       <SaleItem 
         v-for="sale in this.$store.getters.getMinAmountOfSales"
-        :key="sale._id"
+        :key="sale.id"
         :sale="sale"
       />
     </div>

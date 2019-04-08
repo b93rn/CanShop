@@ -34,7 +34,7 @@
       :v-if="users"
       v-for="user in users"
         :user="user"
-        :key="user._id"
+        :key="user.id"
     />
   </div>
 </template>

@@ -19,7 +19,7 @@
        <div class="products">
         <ItemCard class="ItemCard"
           v-for="product in products"
-          :key="product._id"
+          :key="product.id"
           :product="product"
           @itemCardClick="buyProduct"
          />
@@ -71,8 +71,8 @@ export default {
       let editedUser = {}
       let editedProduct = {}
       // create new variables since we do not want to mutate the current state.
-      editedUser._id = this.selectedUser._id
-      editedProduct._id = product._id
+      editedUser.id = this.selectedUser.id
+      editedProduct.id = product.id
       editedUser.canCount = this.selectedUser.canCount + 1
       editedUser.credit = this.convertToCurrency(this.getCurrentCredit())
       editedUser.credit -= this.convertToCurrency(product.price)
@@ -82,7 +82,7 @@ export default {
     },
     updateUser: function() {
       let editedUser = {}
-      editedUser._id = this.selectedUser._id
+      editedUser.id = this.selectedUser.id
       editedUser.credit = this.convertToCurrency(this.getCurrentCredit())
       this.$store.dispatch('updateUser', editedUser).then(user => {
         this.$store.commit('UPDATE_USER', user)
