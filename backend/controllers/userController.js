@@ -38,7 +38,7 @@ exports.index = function (req, res) {
   exports.view = function (req, res) {
     User.findAll({
       where: {
-      .id: req.params.use.id
+      id: req.params.user.id
       }
     }).then(user => {
       res.json({
@@ -62,7 +62,7 @@ exports.index = function (req, res) {
           canCount: req.body.canCount !== undefined ? req.body.canCount : User.canCount
         }, {
           where: {
-          .id: req.params.use.id
+          id: req.params.user.id
           }
         }
       ).then(user => {
@@ -81,7 +81,7 @@ exports.index = function (req, res) {
 // Handle user delete
 exports.delete = function (req, res) {
   User.destroy({where: {
-  .id: req.params.use.id
+  id: req.params.user.id
   }}).then(user => {
     res.json({
       status: "Success",
