@@ -6,6 +6,9 @@ class Product extends Model {
 }
 
 Product.init({
+  name: {
+    type: Sequelize.STRING
+  },
   description: {
     type: Sequelize.STRING
   },
