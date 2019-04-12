@@ -1,6 +1,5 @@
-Sale = require('../models/salesModel')
-User = require('../models/userModel')
-Product = require('../models/productModel')
+const Sale = require('../Data/sale')
+
 
 // TODO: remove populate
 exports.index = function (req, res) {
@@ -22,28 +21,13 @@ exports.index = function (req, res) {
 
 // POST.
 // TODO: Get buyer en product from db and make the copy
-exports.new = function(req, res) {
-    var sale = new Sale()
-    sale.buyer = req.body.user_id,
-    sale.product = req.body.product_id
+exports.new = async (req, res) => {
+    // console.log(req.body.user_id, req.body.product_id);
+    const result = await Sale.AddSale(req.body.user_id, req.body.product_id);
 
-    sale.save(function(err) {
-        if(err) {
-            res.json({
-                status: "Error",
-                message: "Failed to add new sale",
-                errorMessage: err
-            })
-        } else {
-            Sale.findById(sale.id).populate('buyer').populate('product').exec(function(err, newSale) {
-                res.json({
-                    status: "Success",
-                    message: "New sale created",
-                    data: newSale
-                })
-            })
-        }
-    })
+    console.log('test');
+    console.log(result);
+    return result;
 }
 
 // GET.

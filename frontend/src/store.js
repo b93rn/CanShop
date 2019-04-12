@@ -178,7 +178,7 @@ export default new Vuex.Store({
     },
     async buyProduct ({ commit }, { user, product }) {
       try {
-        const result = createSale(user.id, product.id)
+        const result = createSale(user, product)
         // Update the store.
         commit('UPDATE_USER', result.user)
         commit('UPDATE_PRODUCT', result.product)
