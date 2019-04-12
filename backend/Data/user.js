@@ -5,7 +5,6 @@ const {
 const sequelize = require('../database');
 
 class User extends Model {
-
 }
 
 User.init({
@@ -26,5 +25,16 @@ User.init({
 }, {
   sequelize
 });
+
+User.updateUser = async (userId, userData) => {
+  const updatedUser = await User.update(userData, {
+    where: {
+      id: userId
+    },
+      returning: true
+    }
+  );
+  return updatedUser[1][0].dataValues;
+}
 
 module.exports = User;

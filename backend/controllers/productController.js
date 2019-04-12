@@ -56,31 +56,29 @@ exports.view = function (req, res) {
 }
 
 // PUT. 
-exports.update = function (req, res) {
-   Product.update({
-    name: req.body.name !== undefined ? req.body.name : Product.name,
-    description: req.body.description !== undefined ? req.body.description : Product.description,
-    barcode: req.body.barcode !== undefined ? req.body.barcode : Product.barcode,
-    price: req.body.price !== undefined ? req.body.price : product.price,
-    purchasePrice: req.body.purchasePrice !== undefined ? req.body.purchasePrice : Product.purchasePrice,
-    amount: req.body.amount !== undefined ? req.body.amount : Product.amount,
-    color: req.body.color !== undefined ? req.body.color : Product.color
-   }, {
-       where: {
-           id: req.params.product_id
-       },
-       returning: true
-   }).then(product => {
-    res.json({
-        message: "Product has been updated",
-        data: product[1][0].dataValues
-    })
-   }).catch(err => {
-    res.json({
-        status: "Error",
-        message: err
-    })
-   })
+exports.update = async (req, res) => {
+    productObject = {}
+    // Get potential product data from request.
+    req.body.name !== undefined && (productObject.name = req.body.name);
+    req.body.description !== undefined && (productObject.description = req.body.description);
+    req.body.barcode !== undefined && (productObject.barcode = req.body.barcode);
+    req.body.price !== undefined && (productObject.price = req.body.price);
+    req.body.purchasePrice !== undefined && (productObject.purchasePrice = req.body.purchasePrice);
+    req.body.amount !== undefined && (productObject.amount = req.body.amount);
+    req.body.color !== undefined && (productObject.color = req.body.color);
+
+    try {
+        const product = await Product.updateProduct(req.params.product_id, productObject);
+        res.json({
+            message: "Product has been updated",
+            data: product
+        })
+    } catch(err) {
+        res.json({
+            status: "Error",
+            message: err
+        })    
+    }
 }
 
 // DELETE

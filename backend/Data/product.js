@@ -2,7 +2,7 @@ const { Sequelize, Model } = require('sequelize');
 const sequelize = require('../database');
 
 class Product extends Model {
-
+  
 }
 
 Product.init({
@@ -31,5 +31,15 @@ Product.init({
     defaultValue: '#ffffff'
   }
 }, {sequelize} );
+
+Product.updateProduct = async (productId, productData) => {
+  const updateProduct = await Product.update(productData, {
+    where: {
+      id: productId
+    },
+    returning: true
+  });
+  return updateProduct[1][0].dataValues;
+}
 
 module.exports = Product;

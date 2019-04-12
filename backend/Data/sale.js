@@ -4,7 +4,12 @@ const Product = require('./product');
 const User = require('./user');
 
 class Sale extends Model {
+  addSale (userId, productId) {
+    const user = User.findByPk(userId);
+    const product = Product.findByPk(productId);
 
+    
+  }
 }
 
 Sale.init({

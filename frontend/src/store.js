@@ -176,29 +176,19 @@ export default new Vuex.Store({
         console.error(err)
       }
     },
-    async buyProduct ({ commit, dispatch }, { user, product }) {
-      let updatedUser
-      let updatedProduct
-      let saleResult
+    async buyProduct ({ commit }, { user, product }) {
       try {
-        updatedUser = await dispatch('updateUser', user)
-        updatedProduct = await dispatch('updateProduct', product)
+        const result = createSale(user.id, product.id)
+        // Update the store.
+        commit('UPDATE_USER', result.user)
+        commit('UPDATE_PRODUCT', result.product)
+        commit('ADD_SALE', result.sale)
+
+        // Close the Edit user page.
+        commit('SET_USER', null)
       } catch (e) {
         console.error(e)
-        return
       }
-      // Add sale to sales history
-      try {
-        saleResult = await createSale(updatedUser, updatedProduct)
-      } catch (e) {
-        console.error(e)
-        return
-      }
-      commit('UPDATE_USER', updatedUser)
-      commit('UPDATE_PRODUCT', updatedProduct)
-      commit('ADD_SALE', saleResult.data.data)
-      // Close the Edit user page
-      commit('SET_USER', null)
     }
   }
 })

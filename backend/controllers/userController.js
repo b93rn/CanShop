@@ -53,31 +53,27 @@ exports.index = function (req, res) {
   }
 
     // Hand put request. 
-    exports.update = function (req, res) {
-      User.update({
-          firstName: req.body.firstName !== undefined ? req.body.firstName : User.firstName,
-          lastName: req.body.lastName !== undefined ? req.body.lastName : User.lastName,
-          credit: req.body.credit !== undefined ? req.body.credit : User.credit,
-          canCount: req.body.canCount !== undefined ? req.body.canCount : User.canCount
-        }, {
-          where: {
-            id: req.params.user_id
-          },
-          returning: true
-          
+    exports.update = async (req, res) => {
+      const userObject = { }
+      // Get potential updated data from request.
+      req.body.firstName !== undefined && (userObject.firstName = req.body.firstName);
+      req.body.lastName !== undefined && (userObject.lastName = req.body.lastName);
+      req.body.canCount !== undefined && (userObject.canCount = req.body.canCount);
+      req.body.credit !== undefined && (userObject.credit = req.body.credit);
+    
+        try {
+          let user = await User.updateUser(req.params.user_id, userObject);
+          res.json({
+            message: "User details updating...",
+            data: user
+          })
+        } catch (err) {
+          res.json({
+            status: "Error updating user.",
+            message: err
+          })
         }
-      ).then(user => {
-        res.json({
-          message: "User details updating...",
-          data: user[1][0].dataValues
-        })
-      }).catch(err => {
-        res.json({
-          status: "Error updating user.",
-          message: err
-        })
-      });
-    }
+      }
 
 // Handle user delete
 exports.delete = function (req, res) {
