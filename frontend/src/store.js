@@ -178,11 +178,12 @@ export default new Vuex.Store({
     },
     async buyProduct ({ commit }, { user, product }) {
       try {
-        const result = createSale(user, product)
+        const { data } = await createSale(user, product)
+        
         // Update the store.
-        commit('UPDATE_USER', result.user)
-        commit('UPDATE_PRODUCT', result.product)
-        commit('ADD_SALE', result.sale)
+        commit('UPDATE_USER', data.newSale.user)
+        commit('UPDATE_PRODUCT', data.newSale.product)
+        commit('ADD_SALE', { ...data.newSale })
 
         // Close the Edit user page.
         commit('SET_USER', null)

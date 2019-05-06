@@ -1,20 +1,16 @@
-const { Sequelize, Model } = require('sequelize');
+const {
+  Sequelize,
+  Model
+} = require('sequelize');
 const sequelize = require('../database');
 const Product = require('./product');
 const User = require('./user');
 
-class Sale extends Model {
-  addSale (userId, productId) {
-    const user = User.findByPk(userId);
-    const product = Product.findByPk(productId);
-
-    
-  }
-}
+class Sale extends Model {}
 
 Sale.init({
   user_id: {
-    type: Sequelize.INTEGER, 
+    type: Sequelize.INTEGER,
     references: {
       model: User,
       key: 'id',
@@ -22,14 +18,16 @@ Sale.init({
     }
   },
   product_id: {
-    type: Sequelize.INTEGER, 
+    type: Sequelize.INTEGER,
     references: {
       model: Product,
       key: 'id',
       deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
     }
   }
-}, { sequelize });
+}, {
+  sequelize
+});
 
 Sale.All = async () => {
   const result = await Sale.findAll();
@@ -37,35 +35,48 @@ Sale.All = async () => {
   return result;
 }
 
-Sale.AddSale = async (userId, productId) => {
-  const userById = await User.findByPk(userId);
-  const productById = await Product.findByPk(productId);
-  // const { updatedUser, updatedProduct } = calculateSale(user.dataValues, product.dataValues);
-  const {user, product} = calculateSale(userById.dataValues, productById.dataValues);
-  console.log(user,product)
-  try {
-    // console.log(updatedUser)
-    const newUser = await User.updateUser(user.id, user);
-    const newProduct = await Product.updateProduct(product.id, product);
-    console.log(newUser, newProduct);
-
-  } catch(err) {
-    // console.error(err);
-  }
+Sale.AddSale = async (userInput, productInput) => {
+  let userById = await User.findByPk(userInput.id);
+  const productById = await Product.findByPk(productInput.id);
+  let sale, newUser, newProduct;
   
-  // return await Sale.create({user_id: newUser.id, product_id: newProduct.id});
+  userById = updateCredit(userById, userInput.credit);
+  
+  const { user, product } = calculateSale(userById.dataValues, productById.dataValues);
+
+  // Try to update the user and the product and add new sale.
+  try {
+    newUser = await User.updateUser(user.id, user);
+    newProduct = await Product.updateProduct(product.id, product);
+    sale = await Sale.create({
+      user_id: newUser.id,
+      product_id: newProduct.id
+    }); 
+  } catch (err) {
+    console.error(err);
+    throw new Error(err);
+  }
+  return {
+    id: sale.dataValues.id,
+    user: newUser,
+    product: newProduct
+  }
 }
 
 const calculateSale = (user, product) => {
   user.credit -= product.price;
   user.canCount++;
-
+  
   product.amount--;
-  // console.log(user, product)
   return {
     user,
     product
   }
+}
+
+const updateCredit = (user, newCredit) => {
+  user.dataValues.credit = newCredit;
+  return user;
 }
 
 module.exports = Sale;

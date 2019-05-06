@@ -68,17 +68,11 @@ export default {
       this.newCredit = amount
     },
     buyProduct: function(product) {
-      let editedUser = {}
-      let editedProduct = {}
-      // create new variables since we do not want to mutate the current state.
-      editedUser.id = this.selectedUser.id
-      editedProduct.id = product.id
-      editedUser.canCount = this.selectedUser.canCount + 1
-      editedUser.credit = this.convertToCurrency(this.getCurrentCredit())
-      editedUser.credit -= this.convertToCurrency(product.price)
-      editedProduct.amount = product.amount - 1
+      const user = {}
+      user.id = this.selectedUser.id
+      user.credit = this.convertToCurrency(this.getCurrentCredit())
     
-      this.$store.dispatch('buyProduct', { user: editedUser, product: editedProduct });
+      this.$store.dispatch('buyProduct', { user, product });
     },
     updateUser: function() {
       let editedUser = {}
