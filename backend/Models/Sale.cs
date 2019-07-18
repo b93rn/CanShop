@@ -2,8 +2,11 @@ namespace backend.Models
 {
     public class Sale
     {
+        public int Id { get; set; }
         public User Buyer { get; set; }
         public Product Product { get; set; }
+
+        public Sale() {}
 
         public Sale(User user, Product product) {
             Buyer = user;
