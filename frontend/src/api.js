@@ -1,22 +1,25 @@
 import axios from 'axios'
 
-const baseUri = 'http://localhost:8080/api/'
+const baseUri = 'https://localhost:5001/api/'
 
 // USERS
-export const getUsers = () => {
-  return axios.get(baseUri + 'users')
+export const getUsers = async () => {
+  var users = await axios.get(baseUri + 'user')
+  console.log(users);
+  return users;
 }
 
 export const createUser = (user) => {
-  return axios.post(baseUri + 'users', user)
+  return axios.post(baseUri + 'user', user)
 }
 
 export const updateUser = (user) => {
+  console.log(user.id);
   return axios.put(baseUri + 'user/' + user.id, user)
 }
 
 export const deleteUser = (user) => {
-  return axios.delete(baseUri + 'user/' + user.id)
+    return axios.delete(baseUri + 'user/' + user.id);
 }
 
 // PRODUCTS
@@ -29,7 +32,7 @@ export const createProduct = (product) => {
 }
 
 export const updateProduct = (product) => {
-  return axios.put(baseUri + 'product/' + product.id, product)
+  return axios.patch(baseUri + 'product/' + product.id, product)
 }
 
 export const deleteProduct = (product) => {
@@ -38,7 +41,10 @@ export const deleteProduct = (product) => {
 
 // SALES
 export const createSale = (user, product) => {
-  return axios.post(baseUri + 'sales', { user, product })
+  return axios.post(baseUri + 'sales', {
+    user,
+    product
+  })
 }
 
 export const getAmountOfSales = (amount = 13) => {

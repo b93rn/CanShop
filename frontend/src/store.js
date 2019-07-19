@@ -79,9 +79,9 @@ export default new Vuex.Store({
         }
       }
     },
-    DELETE_USER (state, user) {
+    DELETE_USER (state, id) {
       for (let i = 0; i < state.users.length; i++) {
-        if (state.users[i].id === user.id) {
+        if (state.users[i].id === .id) {
           state.users.splice(i, 1)
         }
       }
@@ -104,20 +104,20 @@ export default new Vuex.Store({
   actions: {
     async loadUsers ({ commit }) {
       let result = await getUsers()
-      commit('SET_USERS', result.data.data)
+      commit('SET_USERS', result.data)
     },
     async loadProducts ({ commit }) {
       let result = await getProducts()
-      commit('SET_PRODUCTS', result.data.data)
+      commit('SET_PRODUCTS', result.data)
     },
     async loadSales ({ commit }) {
       let result = await getAmountOfSales()
-      commit('SET_SALES', result.data.data)
+      commit('SET_SALES', result.data)
     },
     async addUser ({ commit }, user) {
       try {
         let result = await createUser(user)
-        commit('ADD_USER', result.data.data)
+        commit('ADD_USER', result.data)
         commit('TOGGLE_CREATING_USER')
       } catch (e) {
         console.error(e)
@@ -126,7 +126,7 @@ export default new Vuex.Store({
     async addProduct ({ commit }, product) {
       try {
         let result = await createProduct(product)
-        commit('ADD_PRODUCT', result.data.data)
+        commit('ADD_PRODUCT', result.data)
         commit('TOGGLE_CREATING_PRODUCT')
       } catch (e) {
         console.error(e)
@@ -135,7 +135,7 @@ export default new Vuex.Store({
     async updateProduct ({ commit }, product) {
       try {
         let result = await updateProduct(product)
-        return result.data.data
+        return result.data
       } catch (e) {
         throw new Error('Updating the product has failed! ' + e)
       }
@@ -143,15 +143,15 @@ export default new Vuex.Store({
     async updateUser ({ commit }, user) {
       try {
         let result = await updateUser(user)
-        return result.data.data
+        return result.data
       } catch (e) {
         throw new Error('Updating the user has failed!')
       }
     },
     async deleteUser ({ commit }, user) {
       let result = await deleteUser(user)
-      if (result.data.success) {
-        commit('DELETE_USER', user)
+      if (result.status < 300) {
+        commit('DELETE_USER', result.data)
         commit('SET_USER', null)
       }
     },

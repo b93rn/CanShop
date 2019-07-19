@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using backend.Migrations.Interfaces;
 using backend.Models;
@@ -27,11 +28,13 @@ namespace backend.Data.Repos
             return await _db.Users.ToListAsync();
         }
 
-        public async Task<User> UpdateUserAsync(User user)
+        public async Task<User> UpdateUserAsync(int id, User user)
         {
-            _db.Users.Update(user);
+            var updatedUser = await _db.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
+            updatedUser.Credit = user.Credit;
+            _db.Entry(updatedUser).State = EntityState.Modified;
             await _db.SaveChangesAsync();
-            return user;
+            return updatedUser;
         }
 
         public async Task<int> DeleteUser(int id)
@@ -40,6 +43,7 @@ namespace backend.Data.Repos
             if (user != null)
             {
                 _db.Users.Remove(user);
+                await _db.SaveChangesAsync();
                 return id;
             }
             else
