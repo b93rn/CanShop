@@ -81,14 +81,14 @@ export default new Vuex.Store({
     },
     DELETE_USER (state, id) {
       for (let i = 0; i < state.users.length; i++) {
-        if (state.users[i].id === .id) {
+        if (state.users[i].id === id) {
           state.users.splice(i, 1)
         }
       }
     },
-    DELETE_PRODUCT (state, product) {
+    DELETE_PRODUCT (state, id) {
       for (let i = 0; i < state.products.length; i++) {
-        if (state.products[i].id === product.id) {
+        if (state.products[i].id === id) {
           state.products.splice(i, 1)
         }
       }
@@ -157,8 +157,8 @@ export default new Vuex.Store({
     },
     async deleteProduct ({ commit }, product) {
       let result = await deleteProduct(product)
-      if (result.data.success) {
-        commit('DELETE_PRODUCT', product)
+      if (result.status < 300) {
+        commit('DELETE_PRODUCT', result.data)
         commit('SET_PRODUCT', null)
       }
     },
@@ -167,10 +167,10 @@ export default new Vuex.Store({
     }, sale) {
       try {
         let result = await refundSale(sale)
-        if (result.data.success) {
-          commit('UPDATE_USER', result.data.data.user)
-          commit('UPDATE_PRODUCT', result.data.data.product)
-          commit('DELETE_SALE', result.data.data.id)
+        if (result.status < 300) {
+          commit('UPDATE_USER', result.data.user)
+          commit('UPDATE_PRODUCT', result.data.product)
+          commit('DELETE_SALE', result.data.id)
         }
       } catch (err) {
         console.error(err)
@@ -178,12 +178,12 @@ export default new Vuex.Store({
     },
     async buyProduct ({ commit }, { user, product }) {
       try {
-        const { data } = await createSale(user, product)
-        
+        const { data } = await createSale(user, product)        
+
         // Update the store.
-        commit('UPDATE_USER', data.newSale.user)
-        commit('UPDATE_PRODUCT', data.newSale.product)
-        commit('ADD_SALE', { ...data.newSale })
+        commit('UPDATE_USER', data.buyer)
+        commit('UPDATE_PRODUCT', data.product)
+        commit('ADD_SALE', { ...data })
 
         // Close the Edit user page.
         commit('SET_USER', null)

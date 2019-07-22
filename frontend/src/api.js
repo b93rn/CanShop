@@ -1,11 +1,11 @@
 import axios from 'axios'
 
-const baseUri = 'https://localhost:5001/api/'
+const baseUri = 'http://localhost:5000/api/'
 
 // USERS
 export const getUsers = async () => {
   var users = await axios.get(baseUri + 'user')
-  console.log(users);
+  // console.log(users);
   return users;
 }
 
@@ -14,7 +14,7 @@ export const createUser = (user) => {
 }
 
 export const updateUser = (user) => {
-  console.log(user.id);
+  // console.log(user);
   return axios.put(baseUri + 'user/' + user.id, user)
 }
 
@@ -23,16 +23,20 @@ export const deleteUser = (user) => {
 }
 
 // PRODUCTS
-export const getProducts = () => {
-  return axios.get(baseUri + 'products')
+export const getProducts = async () => {
+  var products = await axios.get(baseUri + 'product')
+  // console.log(products);
+  return products;
 }
 
 export const createProduct = (product) => {
-  return axios.post(baseUri + 'products', product)
+  return axios.post(baseUri + 'product', product)
 }
 
-export const updateProduct = (product) => {
-  return axios.patch(baseUri + 'product/' + product.id, product)
+export const updateProduct = ({amount, color, description, id, name, price, purchasePrice}) => {
+  const product = {amount, color, description, id, name, price, purchasePrice};
+  // console.log(product);
+  return axios.put(baseUri + 'product/' + product.id, product);
 }
 
 export const deleteProduct = (product) => {
@@ -41,9 +45,9 @@ export const deleteProduct = (product) => {
 
 // SALES
 export const createSale = (user, product) => {
-  return axios.post(baseUri + 'sales', {
-    user,
-    product
+  return axios.post(baseUri + 'sale', {
+    userId: user.id,
+    productId: product.id
   })
 }
 

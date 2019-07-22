@@ -30,7 +30,7 @@ namespace backend.Data.Repos
 
         public async Task<User> UpdateUserAsync(int id, User user)
         {
-            var updatedUser = await _db.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
+            var updatedUser = await GetUserAsync(user.Id);
             updatedUser.Credit = user.Credit;
             _db.Entry(updatedUser).State = EntityState.Modified;
             await _db.SaveChangesAsync();
@@ -39,8 +39,8 @@ namespace backend.Data.Repos
 
         public async Task<int> DeleteUser(int id)
         {
-            var user = await _db.Users.FindAsync(id);
-            if (user != null)
+            var user = await GetUserAsync(id);
+            if (user != null && user.Id == id)
             {
                 _db.Users.Remove(user);
                 await _db.SaveChangesAsync();
@@ -48,6 +48,11 @@ namespace backend.Data.Repos
             }
             else
                 throw new KeyNotFoundException("No user found with the given Id.");
+        }
+
+        public async Task<User> GetUserAsync(int id)
+        {
+            return await _db.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
         }
     }   
 }

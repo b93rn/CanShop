@@ -8,6 +8,7 @@ namespace backend.Migrations.Interfaces
     {
         Task<User> CreateUserAsync(User user);
         Task<List<User>> GetUsersAsync();
+        Task<User> GetUserAsync(int id);
         Task<User> UpdateUserAsync(int id, User user);
         Task<int> DeleteUser(int id);
     }

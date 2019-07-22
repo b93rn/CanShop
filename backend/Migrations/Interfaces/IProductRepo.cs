@@ -8,7 +8,8 @@ namespace backend.Migrations.Interfaces
     {
         Task<Product> CreateProductAsync(Product product);
         Task<List<Product>> GetProductsAsync();
-        Task<Product> UpdateProductAsync(Product product);
+        Task<Product> GetProductAsync(int id);
+        Task<Product> UpdateProductAsync(int id, Product product);
         Task<int> DeleteProduct(int id);
     }
 }

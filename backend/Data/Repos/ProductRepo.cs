@@ -1,11 +1,16 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using backend.Migrations.Interfaces;
 using backend.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Data.Repos
 {
-    public class ProductRepo : IProductRepo 
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ProductRepo : IProductRepo
     {
         private BenchmarkContext _db { get; set; }
 
@@ -13,24 +18,43 @@ namespace backend.Data.Repos
         {
             _db = db;
         }
-        public Task<Product> CreateProductAsync(Product product)
+        public async Task<Product> CreateProductAsync(Product product)
         {
-            throw new System.NotImplementedException();
+            await _db.Products.AddAsync(product);
+            await _db.SaveChangesAsync();
+            return product;
         }
 
-        public Task<int> DeleteProduct(int id)
+        public async Task<int> DeleteProduct(int id)
         {
-            throw new System.NotImplementedException();
+            var product = await GetProductAsync(id);
+            if (product != null && product.Id == id)
+            {
+                _db.Products.Remove(product);
+                await _db.SaveChangesAsync();
+                return id;
+            }
+            else
+                throw new KeyNotFoundException("No product found with the given Id.");
         }
 
-        public Task<List<Product>> GetProductsAsync()
+        public async Task<List<Product>> GetProductsAsync()
         {
-            throw new System.NotImplementedException();
+            return await _db.Products.ToListAsync();
         }
 
-        public Task<Product> UpdateProductAsync(Product product)
+        public async Task<Product> UpdateProductAsync(int id, Product product)
         {
-            throw new System.NotImplementedException();
+            // TODO check if values are not null
+
+            _db.Entry(product).State = EntityState.Modified;
+            await _db.SaveChangesAsync();
+            return product;
+        }
+
+        public async Task<Product> GetProductAsync(int id)
+        {
+            return await _db.Products.Where(x => x.Id == id).FirstOrDefaultAsync();
         }
     }
 }

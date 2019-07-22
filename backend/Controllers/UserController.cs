@@ -15,7 +15,6 @@ namespace backend.Controllers
         public UserController(IUserRepo _userRepo)
         {
             this._userRepo = _userRepo;
-
         }
 
         [HttpPost]

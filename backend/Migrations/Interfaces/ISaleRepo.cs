@@ -6,7 +6,7 @@ namespace backend.Migrations.Interfaces
 {
     public interface ISaleRepo
     {
-        Task<Sale> CreateProductAsync(Sale sale);
+        Task<Sale> CreateSaleAsync(int userId, int productId);
         Task<List<Sale>> GetTopSalesAsync(int selectTop);
         Task<Sale> RefundProductAsync(int id);
     }

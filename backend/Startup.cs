@@ -47,6 +47,8 @@ namespace backend
         });
 
             services.AddTransient<IUserRepo, UserRepo>();
+            services.AddTransient<IProductRepo, ProductRepo>();
+            services.AddTransient<ISaleRepo, SaleRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,7 +65,6 @@ namespace backend
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

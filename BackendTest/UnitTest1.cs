@@ -20,7 +20,6 @@ namespace BackendTest
             _product = new Product {
                 Name = "Cola",
                 Description = "Cheap Cola",
-                Barcode = "01010101",
                 Price = 0.50m,
                 PurchasePrice = 0.40m,
                 Amount = 10
