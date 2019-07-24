@@ -52,7 +52,7 @@ export const createSale = (user, product) => {
 }
 
 export const getAmountOfSales = (amount = 13) => {
-  return axios.get(baseUri + 'sales/' + amount)
+  return axios.get(baseUri + 'sale/' + amount)
 }
 
 export const refundSale = (sale) => {

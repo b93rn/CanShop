@@ -1,15 +1,17 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using backend.Migrations.Interfaces;
 using backend.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Data.Repos
 {
     public class SaleRepo : ISaleRepo
     {
-        private BenchmarkContext _db;
-        private IUserRepo _userRepo;
-        private IProductRepo _productRepo;
+        private readonly BenchmarkContext _db;
+        private readonly IUserRepo _userRepo;
+        private readonly IProductRepo _productRepo;
 
         public SaleRepo(BenchmarkContext db, IUserRepo userRepo, IProductRepo productRepo)
         {
@@ -32,22 +34,59 @@ namespace backend.Data.Repos
                 await _db.Sales.AddAsync(sale);
                 await _db.SaveChangesAsync();
                 return sale;
-            } 
-            catch {
+            }
+            catch
+            {
                 // TODO: Seperate Savechanges can cause halve transactions.
                 throw new TaskCanceledException("Sale has failed.");
             }
 
         }
 
-        public Task<List<Sale>> GetTopSalesAsync(int selectTop)
+        public async Task<List<Sale>> GetTopSales(int selectTop)
         {
-            throw new System.NotImplementedException();
+            return await _db.Sales
+                .OrderByDescending(x => x.Id)
+                .Take(selectTop)
+                .Include(x => x.Product)
+                .Include(x => x.Buyer)
+                .ToListAsync();
         }
 
-        public Task<Sale> RefundProductAsync(int id)
+        public async Task<RefundSaleResult> RefundProductAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var sale = await _db.Sales.Where(x => x.Id == id)
+                .Include(x => x.Buyer)
+                .Include(x => x.Product)
+                .SingleOrDefaultAsync();
+            
+            if(sale == null) 
+                throw new KeyNotFoundException("Sale not found with the given Id.");
+
+            sale.RefundProduct();
+
+            // If the buyer or the product still exist apply refund changes to them.
+            if (sale.Buyer != null)
+            {
+                await _userRepo.UpdateUserAsync(sale.Buyer.Id, sale.Buyer);
+            }
+
+            if (sale.Product != null)
+            {
+                await _productRepo.UpdateProductAsync(sale.Product.Id, sale.Product);
+            }
+
+            _db.Sales.Remove(sale);
+            await _db.SaveChangesAsync();
+
+            return new RefundSaleResult { SaleId = id, Buyer = sale.Buyer, Product = sale.Product};
         }
+    }
+
+    public class RefundSaleResult
+    {
+        public int SaleId { get; set; }
+        public User Buyer { get; set; }
+        public Product Product { get; set; }
     }
 }

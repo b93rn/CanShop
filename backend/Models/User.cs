@@ -16,9 +16,9 @@ namespace backend.Models
             CanCount++;
         }
 
-        public void RefundProduct(Product product)
+        public void RefundProduct(Sale sale)
         {
-            Credit += product.Price;
+            Credit += sale.SoldFor;
             CanCount--;
         }
     }

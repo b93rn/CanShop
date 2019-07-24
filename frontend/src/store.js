@@ -30,8 +30,8 @@ export default new Vuex.Store({
     slidePageIsActive: state => {
       return (state.creatingUser || state.creatingProduct || state.selectedUser || state.selectedProduct) ? true : false
     },
-    getMinAmountOfSales: (state, amount) => {
-      return state.sales
+    getMinAmountOfSales: (state) => {
+      return state.sales.slice(0, 8);
     }
   },
   mutations: {
@@ -94,6 +94,7 @@ export default new Vuex.Store({
       }
     },
     DELETE_SALE (state, saleId) {
+      console.log(saleId);
       for (let i = 0; i < state.sales.length; i++) {
         if (state.sales[i].id === saleId) {
           state.sales.splice(i, 1)
@@ -168,9 +169,10 @@ export default new Vuex.Store({
       try {
         let result = await refundSale(sale)
         if (result.status < 300) {
-          commit('UPDATE_USER', result.data.user)
+          console.log(result);
+          commit('UPDATE_USER', result.data.buyer)
           commit('UPDATE_PRODUCT', result.data.product)
-          commit('DELETE_SALE', result.data.id)
+          commit('DELETE_SALE', result.data.saleId)
         }
       } catch (err) {
         console.error(err)

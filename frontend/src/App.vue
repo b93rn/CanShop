@@ -28,7 +28,9 @@ export default {
 body {
   margin: 0;
   background-color: var(--main-bg);
+  overflow: hidden;
 }
+
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -37,7 +39,6 @@ body {
   max-height: 100%;
   background-color: var(--main-bg);
   color: var(--main-black);
-  overflow: hidden;
 }
 
 .slide-enter-active {

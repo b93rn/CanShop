@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using backend.Data;
@@ -9,9 +10,10 @@ using backend.Data;
 namespace backend.Migrations
 {
     [DbContext(typeof(BenchmarkContext))]
-    partial class BenchmarkContextModelSnapshot : ModelSnapshot
+    [Migration("20190724193753_DateToSale")]
+    partial class DateToSale
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
