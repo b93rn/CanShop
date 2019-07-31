@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend.Data
 {
-    public class BenchmarkContext : DbContext
+    public class CanshopContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Sale> Sales { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql("Host=localhost;Database=canshop;Username=postgres;Password=postgresmdf");
+            => optionsBuilder.UseNpgsql("Host=postgres;Port=5432;Database=canshop;Username=postgres;");
     }
 }

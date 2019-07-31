@@ -9,11 +9,11 @@ namespace backend.Data.Repos
 {
     public class SaleRepo : ISaleRepo
     {
-        private readonly BenchmarkContext _db;
+        private readonly CanshopContext _db;
         private readonly IUserRepo _userRepo;
         private readonly IProductRepo _productRepo;
 
-        public SaleRepo(BenchmarkContext db, IUserRepo userRepo, IProductRepo productRepo)
+        public SaleRepo(CanshopContext db, IUserRepo userRepo, IProductRepo productRepo)
         {
             _db = db;
             _userRepo = userRepo;

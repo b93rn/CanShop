@@ -8,8 +8,8 @@ using backend.Data;
 
 namespace backend.Migrations
 {
-    [DbContext(typeof(BenchmarkContext))]
-    partial class BenchmarkContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(CanshopContext))]
+    partial class CanshopContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

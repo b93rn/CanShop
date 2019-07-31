@@ -12,9 +12,9 @@ namespace backend.Data.Repos
     [ApiController]
     public class ProductRepo : IProductRepo
     {
-        private BenchmarkContext _db { get; set; }
+        private CanshopContext _db { get; set; }
 
-        public ProductRepo(BenchmarkContext db)
+        public ProductRepo(CanshopContext db)
         {
             _db = db;
         }

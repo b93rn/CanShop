@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore;
 namespace backend.Data.Repos
 {
     public class UserRepo : IUserRepo
-    {
-        private BenchmarkContext _db { get; set; }
+    {   
+        private CanshopContext _db { get; set; }
 
-        public UserRepo(BenchmarkContext db)
+        public UserRepo(CanshopContext db)
         {
             _db = db;
         }

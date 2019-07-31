@@ -9,7 +9,7 @@ using backend.Data;
 
 namespace backend.Migrations
 {
-    [DbContext(typeof(BenchmarkContext))]
+    [DbContext(typeof(CanshopContext))]
     [Migration("20190720183302_removedBarcode")]
     partial class removedBarcode
     {

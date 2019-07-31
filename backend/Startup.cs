@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -21,6 +22,10 @@ namespace backend
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            using (var context = new CanshopContext())
+            {
+                context.Database.Migrate();
+            }
         }
 
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -30,8 +35,10 @@ namespace backend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddEntityFrameworkNpgsql()
-                .AddDbContext<BenchmarkContext>()
+                .AddDbContext<CanshopContext>()
                 .BuildServiceProvider();
+
+            Console.WriteLine("DB Running");
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -40,7 +47,7 @@ namespace backend
             options.AddPolicy(MyAllowSpecificOrigins,
             builder =>
             {
-                builder.WithOrigins("http://localhost:8080")
+                builder.WithOrigins("http://localhost:8080", "http://localhost:80", "frontend")
                 .AllowAnyHeader()
                 .AllowAnyMethod();
             });
@@ -54,10 +61,10 @@ namespace backend
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseCors(MyAllowSpecificOrigins);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseCors(MyAllowSpecificOrigins);
             }
             else
             {
