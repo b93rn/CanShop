@@ -10,6 +10,6 @@ namespace backend.Data
         public DbSet<Sale> Sales { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql("Host=postgres;Port=5432;Database=canshop;Username=postgres;");
+            => optionsBuilder.UseNpgsql("Host=postgres;Database=canshop;Username=postgres;");
     }
 }
