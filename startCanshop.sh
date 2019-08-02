@@ -7,8 +7,12 @@ Created by:
  / ___ \| | |  | |_) | (_) | |  | | | |
 /_/   \_\_|_|  |____/ \___/|_|  |_| |_| 
 "
-cd ~/Documents/CanShop | docker-compose up
+cd ~/Documents/CanShop 
 
-DISPLAY=:0 chromium-browser localhost:8080
+docker-compose start &&
+echo "Waiting untill services are started..." &&
+sleep 10 &&
+echo "Starting brouwser..."
+DISPLAY=:0 chromium-browser http://localhost:8080
 
-done
+exit 0
