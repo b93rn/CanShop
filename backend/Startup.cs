@@ -22,10 +22,6 @@ namespace backend
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            using (var context = new CanshopContext())
-            {
-                context.Database.Migrate();
-            }
         }
 
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -34,9 +30,9 @@ namespace backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddEntityFrameworkNpgsql()
-                .AddDbContext<CanshopContext>()
-                .BuildServiceProvider();
+            services.AddDbContext<CanshopContext>(options =>
+                    options.UseNpgsql(Configuration.GetConnectionString("CanShopDatabase")))
+                    .BuildServiceProvider();
 
             Console.WriteLine("DB Running");
 
@@ -59,8 +55,9 @@ namespace backend
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, CanshopContext context)
         {
+            context.Database.Migrate();
             app.UseCors(MyAllowSpecificOrigins);
             if (env.IsDevelopment())
             {

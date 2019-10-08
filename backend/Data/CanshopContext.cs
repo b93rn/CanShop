@@ -9,8 +9,7 @@ namespace backend.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Sale> Sales { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql("Host=localhost;Database=canshop;Username=postgres;Password=postgresmdf");
+        public CanshopContext(DbContextOptions<CanshopContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
