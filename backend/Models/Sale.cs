@@ -15,12 +15,13 @@ namespace backend.Models
         public int AmountAfterSale { get; set; }
         public decimal SoldFor { get; set; }
         public decimal PurchasePrice { get; set; }
-        public string Color { get; set; } 
+        public string Color { get; set; }
         public DateTime Date { get; set; }
 
-        public Sale() {}
+        public Sale() { }
 
-        public Sale(User user, Product product) {
+        public Sale(User user, Product product)
+        {
             Buyer = user;
             Product = product;
             BuyerFirstName = Buyer.FirstName;
@@ -44,10 +45,10 @@ namespace backend.Models
 
         public Sale RefundProduct()
         {
-            if(Buyer != null)
+            if (Buyer != null)
                 Buyer.RefundProduct(this);
 
-            if(Product != null)
+            if (Product != null)
                 Product.Refund();
 
             return this;

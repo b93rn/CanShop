@@ -10,8 +10,8 @@ using backend.Data;
 namespace backend.Migrations
 {
     [DbContext(typeof(CanshopContext))]
-    [Migration("20190724183453_SaferSales_2")]
-    partial class SaferSales_2
+    [Migration("20191008181138_testModelBuilder3")]
+    partial class testModelBuilder3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,6 +62,8 @@ namespace backend.Migrations
 
                     b.Property<string>("Color");
 
+                    b.Property<DateTime>("Date");
+
                     b.Property<int?>("ProductId");
 
                     b.Property<string>("ProductName");
@@ -100,12 +102,14 @@ namespace backend.Migrations
             modelBuilder.Entity("backend.Models.Sale", b =>
                 {
                     b.HasOne("backend.Models.User", "Buyer")
-                        .WithMany()
-                        .HasForeignKey("BuyerId");
+                        .WithMany("Sales")
+                        .HasForeignKey("BuyerId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("backend.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
+                        .WithMany("Sales")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 #pragma warning restore 612, 618
         }

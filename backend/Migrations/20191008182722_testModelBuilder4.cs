@@ -2,7 +2,7 @@
 
 namespace backend.Migrations
 {
-    public partial class SaferSales_2 : Migration
+    public partial class testModelBuilder4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

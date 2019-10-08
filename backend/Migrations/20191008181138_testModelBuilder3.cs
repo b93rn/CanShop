@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace backend.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class testModelBuilder3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,10 +16,10 @@ namespace backend.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    Barcode = table.Column<string>(nullable: true),
                     Price = table.Column<decimal>(nullable: false),
                     PurchasePrice = table.Column<decimal>(nullable: false),
-                    Amount = table.Column<int>(nullable: false)
+                    Amount = table.Column<int>(nullable: false),
+                    Color = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -48,7 +49,17 @@ namespace backend.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     BuyerId = table.Column<int>(nullable: true),
-                    ProductId = table.Column<int>(nullable: true)
+                    BuyerFirstName = table.Column<string>(nullable: true),
+                    BuyerLastName = table.Column<string>(nullable: true),
+                    CanCountAfterSale = table.Column<int>(nullable: false),
+                    BuyerCreditAfterSale = table.Column<decimal>(nullable: false),
+                    ProductId = table.Column<int>(nullable: true),
+                    ProductName = table.Column<string>(nullable: true),
+                    AmountAfterSale = table.Column<int>(nullable: false),
+                    SoldFor = table.Column<decimal>(nullable: false),
+                    PurchasePrice = table.Column<decimal>(nullable: false),
+                    Color = table.Column<string>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,13 +69,13 @@ namespace backend.Migrations
                         column: x => x.BuyerId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Sales_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateIndex(

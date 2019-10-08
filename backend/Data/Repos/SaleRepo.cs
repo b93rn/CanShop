@@ -59,8 +59,8 @@ namespace backend.Data.Repos
                 .Include(x => x.Buyer)
                 .Include(x => x.Product)
                 .SingleOrDefaultAsync();
-            
-            if(sale == null) 
+
+            if (sale == null)
                 throw new KeyNotFoundException("Sale not found with the given Id.");
 
             sale.RefundProduct();
@@ -79,7 +79,7 @@ namespace backend.Data.Repos
             _db.Sales.Remove(sale);
             await _db.SaveChangesAsync();
 
-            return new RefundSaleResult { SaleId = id, Buyer = sale.Buyer, Product = sale.Product};
+            return new RefundSaleResult { SaleId = id, Buyer = sale.Buyer, Product = sale.Product };
         }
     }
 

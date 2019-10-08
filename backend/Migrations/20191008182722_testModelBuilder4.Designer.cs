@@ -10,8 +10,8 @@ using backend.Data;
 namespace backend.Migrations
 {
     [DbContext(typeof(CanshopContext))]
-    [Migration("20190724193753_DateToSale")]
-    partial class DateToSale
+    [Migration("20191008182722_testModelBuilder4")]
+    partial class testModelBuilder4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -103,11 +103,13 @@ namespace backend.Migrations
                 {
                     b.HasOne("backend.Models.User", "Buyer")
                         .WithMany()
-                        .HasForeignKey("BuyerId");
+                        .HasForeignKey("BuyerId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("backend.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 #pragma warning restore 612, 618
         }

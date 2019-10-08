@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using backend.Data;
@@ -10,10 +9,9 @@ using backend.Data;
 namespace backend.Migrations
 {
     [DbContext(typeof(CanshopContext))]
-    [Migration("20190718195725_InitialCreate")]
-    partial class InitialCreate
+    partial class CanshopContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,7 +26,7 @@ namespace backend.Migrations
 
                     b.Property<int>("Amount");
 
-                    b.Property<string>("Barcode");
+                    b.Property<string>("Color");
 
                     b.Property<string>("Description");
 
@@ -48,9 +46,29 @@ namespace backend.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("AmountAfterSale");
+
+                    b.Property<decimal>("BuyerCreditAfterSale");
+
+                    b.Property<string>("BuyerFirstName");
+
                     b.Property<int?>("BuyerId");
 
+                    b.Property<string>("BuyerLastName");
+
+                    b.Property<int>("CanCountAfterSale");
+
+                    b.Property<string>("Color");
+
+                    b.Property<DateTime>("Date");
+
                     b.Property<int?>("ProductId");
+
+                    b.Property<string>("ProductName");
+
+                    b.Property<decimal>("PurchasePrice");
+
+                    b.Property<decimal>("SoldFor");
 
                     b.HasKey("Id");
 
@@ -83,11 +101,13 @@ namespace backend.Migrations
                 {
                     b.HasOne("backend.Models.User", "Buyer")
                         .WithMany()
-                        .HasForeignKey("BuyerId");
+                        .HasForeignKey("BuyerId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("backend.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 #pragma warning restore 612, 618
         }
