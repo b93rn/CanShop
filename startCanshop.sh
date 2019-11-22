@@ -9,10 +9,10 @@ Created by:
 "
 cd ~/Documents/CanShop 
 
-docker-compose start &&
+docker-compose up &&
 echo "Waiting untill services are started..." &&
 sleep 10 &&
-echo "Starting brouwser..."
+echo "Starting browser..."
 DISPLAY=:0 chromium-browser http://localhost:8080
 
 exit 0

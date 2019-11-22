@@ -1,12 +1,10 @@
 version: "3"
 services:
   postgres:
-    image: postgres
+    image: postgres:11
     restart: always
     volumes:
-      - ./localFolder:/data/db
-    # ports:
-    #   - '5433:5432'
+      - $HOME/docker/volumes/postgres:/var/lib/postgresql/data
   backend:
     image: b93rn/canshop_backend:rpi
     restart: always
