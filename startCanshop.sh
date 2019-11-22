@@ -11,7 +11,7 @@ cd ~/Documents/CanShop
 
 docker-compose up -d &&
 echo "Waiting untill services are started..." &&
-sleep 10 &&
+sleep 12 &&
 echo "Starting browser..."
 DISPLAY=:0 chromium-browser --start-fullscreen --app=http://localhost:8080 &&
 exit 
