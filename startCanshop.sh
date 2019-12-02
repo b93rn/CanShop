@@ -13,5 +13,5 @@ docker-compose up -d &&
 echo "Waiting untill services are started..." &&
 sleep 12 &&
 echo "Starting browser..."
-DISPLAY=:0 chromium-browser --start-fullscreen --app=http://localhost:8080 &&
-exit 
+chromium-browser --app=http://localhost:8080 
+#DISPLAY=:0 chromium-browser --app=http://localhost:8080 &&

@@ -1,0 +1,67 @@
+ --disable-quic --enable-tcp-fast-open --disable-gpu-compositing --ppapi-flash-path=/usr/lib/chromium-browser/libpepflashplayer.so --ppapi-flash-args=enable_stagevideo_auto=0 --ppapi-flash-version=
+Fontconfig warning: "/etc/fonts/fonts.conf", line 160: blank doesn't take any effect anymore. please remove it from your fonts.conf
+[2873:2873:1123/144732.724306:ERROR:gpu_process_transport_factory.cc(1029)] Lost UI shared context.
+Er is een nieuw venster gemaakt in de bestaande browsersessie.
+ --disable-quic --enable-tcp-fast-open --disable-gpu-compositing --ppapi-flash-path=/usr/lib/chromium-browser/libpepflashplayer.so --ppapi-flash-args=enable_stagevideo_auto=0 --ppapi-flash-version=
+Fontconfig warning: "/etc/fonts/fonts.conf", line 160: blank doesn't take any effect anymore. please remove it from your fonts.conf
+[3950:3950:1123/145002.134962:ERROR:gpu_process_transport_factory.cc(1029)] Lost UI shared context.
+[3950:3986:1123/145002.358938:ERROR:in_progress_cache_impl.cc(93)] Could not read download entries from file because there was a read failure.
+[3950:4050:1123/145002.366879:ERROR:object_proxy.cc(626)] Failed to call method: org.freedesktop.Notifications.GetCapabilities: object_path= /org/freedesktop/Notifications: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.Notifications was not provided by any .service files
+ATTENTION: default value of option force_s3tc_enable overridden by environment.
+[4057:4057:1123/145003.889995:ERROR:sandbox_linux.cc(375)] InitializeSandbox() called with multiple threads in process gpu-process.
+ --disable-quic --enable-tcp-fast-open --disable-gpu-compositing --ppapi-flash-path=/usr/lib/chromium-browser/libpepflashplayer.so --ppapi-flash-args=enable_stagevideo_auto=0 --ppapi-flash-version=
+Fontconfig warning: "/etc/fonts/fonts.conf", line 160: blank doesn't take any effect anymore. please remove it from your fonts.conf
+[5039:5039:1123/145139.164602:ERROR:gpu_process_transport_factory.cc(1029)] Lost UI shared context.
+[5039:5076:1123/145139.390396:ERROR:in_progress_cache_impl.cc(93)] Could not read download entries from file because there was a read failure.
+[5039:5139:1123/145139.392976:ERROR:object_proxy.cc(626)] Failed to call method: org.freedesktop.Notifications.GetCapabilities: object_path= /org/freedesktop/Notifications: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.Notifications was not provided by any .service files
+ATTENTION: default value of option force_s3tc_enable overridden by environment.
+[5143:5143:1123/145141.134216:ERROR:sandbox_linux.cc(375)] InitializeSandbox() called with multiple threads in process gpu-process.
+ --disable-quic --enable-tcp-fast-open --disable-gpu-compositing --ppapi-flash-path=/usr/lib/chromium-browser/libpepflashplayer.so --ppapi-flash-args=enable_stagevideo_auto=0 --ppapi-flash-version=
+Fontconfig warning: "/etc/fonts/fonts.conf", line 160: blank doesn't take any effect anymore. please remove it from your fonts.conf
+[6516:6516:1123/150114.905421:ERROR:gpu_process_transport_factory.cc(1029)] Lost UI shared context.
+Er is een nieuw venster gemaakt in de bestaande browsersessie.
+ --disable-quic --enable-tcp-fast-open --disable-gpu-compositing --ppapi-flash-path=/usr/lib/chromium-browser/libpepflashplayer.so --ppapi-flash-args=enable_stagevideo_auto=0 --ppapi-flash-version=
+Fontconfig warning: "/etc/fonts/fonts.conf", line 160: blank doesn't take any effect anymore. please remove it from your fonts.conf
+[2903:2903:1123/155252.566964:ERROR:gpu_process_transport_factory.cc(1029)] Lost UI shared context.
+[2903:2940:1123/155252.785405:ERROR:in_progress_cache_impl.cc(93)] Could not read download entries from file because there was a read failure.
+[2903:3003:1123/155252.790443:ERROR:object_proxy.cc(626)] Failed to call method: org.freedesktop.Notifications.GetCapabilities: object_path= /org/freedesktop/Notifications: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.Notifications was not provided by any .service files
+ATTENTION: default value of option force_s3tc_enable overridden by environment.
+[3007:3007:1123/155254.327595:ERROR:sandbox_linux.cc(375)] InitializeSandbox() called with multiple threads in process gpu-process.
+[2903:2903:1123/155815.278751:ERROR:chrome_browser_main_extra_parts_x11.cc(62)] X IO error received (X server probably went away)
+[2903:2903:1123/155815.575199:ERROR:zygote_communication_linux.cc(278)] Failed to send GetTerminationStatus message to zygote
+[2903:2903:1123/155815.587583:ERROR:zygote_communication_linux.cc(278)] Failed to send GetTerminationStatus message to zygote
+ --disable-quic --enable-tcp-fast-open --disable-gpu-compositing --ppapi-flash-path=/usr/lib/chromium-browser/libpepflashplayer.so --ppapi-flash-args=enable_stagevideo_auto=0 --ppapi-flash-version=
+Fontconfig warning: "/etc/fonts/fonts.conf", line 160: blank doesn't take any effect anymore. please remove it from your fonts.conf
+[2231:2231:1123/162047.904036:ERROR:gpu_process_transport_factory.cc(1029)] Lost UI shared context.
+[2231:2268:1123/162048.134175:ERROR:in_progress_cache_impl.cc(93)] Could not read download entries from file because there was a read failure.
+[2231:2331:1123/162048.137567:ERROR:object_proxy.cc(626)] Failed to call method: org.freedesktop.Notifications.GetCapabilities: object_path= /org/freedesktop/Notifications: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.Notifications was not provided by any .service files
+ATTENTION: default value of option force_s3tc_enable overridden by environment.
+[2335:2335:1123/162049.579833:ERROR:sandbox_linux.cc(375)] InitializeSandbox() called with multiple threads in process gpu-process.
+ --disable-quic --enable-tcp-fast-open --disable-gpu-compositing --ppapi-flash-path=/usr/lib/chromium-browser/libpepflashplayer.so --ppapi-flash-args=enable_stagevideo_auto=0 --ppapi-flash-version=
+Fontconfig warning: "/etc/fonts/fonts.conf", line 160: blank doesn't take any effect anymore. please remove it from your fonts.conf
+[1712:1712:1123/162316.271480:ERROR:gpu_process_transport_factory.cc(1029)] Lost UI shared context.
+[1712:1821:1123/162317.365898:ERROR:object_proxy.cc(626)] Failed to call method: org.freedesktop.Notifications.GetCapabilities: object_path= /org/freedesktop/Notifications: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.Notifications was not provided by any .service files
+[1712:1756:1123/162317.380978:ERROR:in_progress_cache_impl.cc(93)] Could not read download entries from file because there was a read failure.
+ATTENTION: default value of option force_s3tc_enable overridden by environment.
+[1825:1825:1123/162319.224194:ERROR:sandbox_linux.cc(375)] InitializeSandbox() called with multiple threads in process gpu-process.
+ --disable-quic --enable-tcp-fast-open --disable-gpu-compositing --ppapi-flash-path=/usr/lib/chromium-browser/libpepflashplayer.so --ppapi-flash-args=enable_stagevideo_auto=0 --ppapi-flash-version=
+Fontconfig warning: "/etc/fonts/fonts.conf", line 160: blank doesn't take any effect anymore. please remove it from your fonts.conf
+[1716:1716:1123/162456.598672:ERROR:gpu_process_transport_factory.cc(1029)] Lost UI shared context.
+[1716:1824:1123/162457.690744:ERROR:object_proxy.cc(626)] Failed to call method: org.freedesktop.Notifications.GetCapabilities: object_path= /org/freedesktop/Notifications: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.Notifications was not provided by any .service files
+[1716:1762:1123/162457.705826:ERROR:in_progress_cache_impl.cc(93)] Could not read download entries from file because there was a read failure.
+ATTENTION: default value of option force_s3tc_enable overridden by environment.
+[1829:1829:1123/162459.608904:ERROR:sandbox_linux.cc(375)] InitializeSandbox() called with multiple threads in process gpu-process.
+ --disable-quic --enable-tcp-fast-open --disable-gpu-compositing --ppapi-flash-path=/usr/lib/chromium-browser/libpepflashplayer.so --ppapi-flash-args=enable_stagevideo_auto=0 --ppapi-flash-version=
+Fontconfig warning: "/etc/fonts/fonts.conf", line 160: blank doesn't take any effect anymore. please remove it from your fonts.conf
+[2216:2216:1123/162841.457573:ERROR:gpu_process_transport_factory.cc(1029)] Lost UI shared context.
+[2216:2252:1123/162841.677015:ERROR:in_progress_cache_impl.cc(93)] Could not read download entries from file because there was a read failure.
+[2216:2315:1123/162841.679453:ERROR:object_proxy.cc(626)] Failed to call method: org.freedesktop.Notifications.GetCapabilities: object_path= /org/freedesktop/Notifications: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.Notifications was not provided by any .service files
+ATTENTION: default value of option force_s3tc_enable overridden by environment.
+[2320:2320:1123/162843.002447:ERROR:sandbox_linux.cc(375)] InitializeSandbox() called with multiple threads in process gpu-process.
+[2216:2216:1123/162909.225217:ERROR:chrome_browser_main_extra_parts_x11.cc(62)] X IO error received (X server probably went away)
+[2216:2216:1123/162909.225740:ERROR:zygote_communication_linux.cc(278)] Failed to send GetTerminationStatus message to zygote
+[2216:2216:1123/162909.252287:ERROR:zygote_communication_linux.cc(278)] Failed to send GetTerminationStatus message to zygote
+ --disable-quic --enable-tcp-fast-open --disable-gpu-compositing --ppapi-flash-path=/usr/lib/chromium-browser/libpepflashplayer.so --ppapi-flash-args=enable_stagevideo_auto=0 --ppapi-flash-version=
+Fontconfig warning: "/etc/fonts/fonts.conf", line 160: blank doesn't take any effect anymore. please remove it from your fonts.conf
+[2456:2456:1123/164027.996029:ERROR:gpu_process_transport_factory.cc(1029)] Lost UI shared context.
+Er is een nieuw venster gemaakt in de bestaande browsersessie.
