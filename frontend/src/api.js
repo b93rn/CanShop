@@ -14,7 +14,6 @@ export const createUser = (user) => {
 }
 
 export const updateUser = (user) => {
-  // console.log(user);
   return axios.put(baseUri + 'user/' + user.id, user)
 }
 
