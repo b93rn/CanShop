@@ -29,3 +29,9 @@ npm run lint
 ```
 npm run test:unit
 ```
+### Push to docker hub
+- docker login
+- docker build
+- docker tag imageName user/frontend:latest
+- docker push user/frontend:latest
+
