@@ -9,7 +9,7 @@ Created by:
 "
 cd ~/Documents/CanShop 
 
-docker-compose up -d &&
+docker-compose pull && docker-compose up -d &&
 echo "Waiting untill services are started..." &&
 sleep 12 &&
 echo "Starting browser..."
