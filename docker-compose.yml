@@ -13,7 +13,7 @@ services:
     links:
       - postgres
   frontend:
-    image: b93rn/frontend:latest
+    image: b93rn/frontend:1.0.0
     ports:
       - "8080:80"
     links:
