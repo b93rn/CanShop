@@ -13,5 +13,5 @@ sleep 10 && git pull && docker-compose pull && docker-compose up -d &&
 echo "Waiting untill services are started..." &&
 sleep 12 &&
 echo "Starting browser..."
-chromium-browser --app=http://localhost:8080 
+chromium-browser --kiosk --app=http://localhost:8080 
 #DISPLAY=:0 chromium-browser --app=http://localhost:8080 &&
