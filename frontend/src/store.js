@@ -96,7 +96,6 @@ export default new Vuex.Store({
       }
     },
     DELETE_SALE (state, saleId) {
-      console.log(saleId);
       for (let i = 0; i < state.sales.length; i++) {
         if (state.sales[i].id === saleId) {
           state.sales.splice(i, 1)
@@ -171,7 +170,6 @@ export default new Vuex.Store({
       try {
         let result = await refundSale(sale)
         if (result.status < 300) {
-          console.log(result);
           commit('UPDATE_USER', result.data.buyer)
           commit('UPDATE_PRODUCT', result.data.product)
           commit('DELETE_SALE', result.data.saleId)
