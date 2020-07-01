@@ -52,6 +52,10 @@ export default {
     },
     setSelectedUserInStore: function(user) {
       this.$store.commit('SET_USER', user)
+    },
+    lockScreenTimer: function () {
+      this.$store.commit('SET_USER', null)
+      this.$router.push('lockscreen')
     }
   },
   computed: {
@@ -62,10 +66,14 @@ export default {
       'selectedProduct'
     ]),
     getSortedUsers () {
-      return this.users.sort((a, b) => {
+      let sortedUsers = this.users
+      return sortedUsers.sort((a, b) => {
         return b.canCount - a.canCount
       })
     }
+  },
+  timers: {
+    lockScreenTimer: { time: 5 * 60 * 1000, autostart: true }
   }
 }
 </script>

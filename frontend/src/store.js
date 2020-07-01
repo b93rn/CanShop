@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VueTimers from 'vue-timers'
 import {
   getUsers,
   getProducts,
@@ -15,6 +16,7 @@ import {
 } from './api'
 
 Vue.use(Vuex)
+Vue.use(VueTimers)
 
 export default new Vuex.Store({
   state: {
