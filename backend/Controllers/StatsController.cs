@@ -40,7 +40,7 @@ namespace backend.Controllers
             if (boughtTimes < 1)
                 return Ok($"{user.FirstName} {user.LastName} drinkt liever geen {product.Name}");
 
-            return Ok($"{user.FirstName} {user.LastName} heeft {boughtTimes} keer {product.Name} gekocht");
+            return Ok($"{user.FirstName} {user.LastName} heeft {boughtTimes} keer een {product.Name} gekocht");
         }
     }
 }
