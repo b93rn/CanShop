@@ -52,6 +52,7 @@ export default {
     },
     setSelectedUserInStore: function(user) {
       this.$store.commit('SET_USER', user)
+      this.$timer.restart('lockScreenTimer')
     },
     lockScreenTimer: function () {
       this.$store.commit('SET_USER', null)
