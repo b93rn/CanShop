@@ -54,3 +54,7 @@ export const getAmountOfSales = (amount = 13) => {
 export const refundSale = (sale) => {
   return axios.delete(baseUri + 'sale/' + sale.id)
 }
+
+export const getSaleStat = () => {
+  return axios.get(baseUri + 'stats')
+}
