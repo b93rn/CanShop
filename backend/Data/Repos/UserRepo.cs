@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace backend.Data.Repos
 {
     public class UserRepo : IUserRepo
-    {   
+    {
         private CanshopContext _db { get; set; }
 
         public UserRepo(CanshopContext db)
@@ -54,5 +55,18 @@ namespace backend.Data.Repos
         {
             return await _db.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
         }
-    }   
+
+        public async Task<User> GetRandomUser()
+        {
+            var users = await GetUsersAsync();
+
+            if (users.Count < 1)
+                return null;
+
+            var rnd = new Random();
+            var randomNumber = rnd.Next(users.Count);
+
+            return users[randomNumber];
+        }
+    }
 }

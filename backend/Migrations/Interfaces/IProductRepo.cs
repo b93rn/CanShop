@@ -11,5 +11,6 @@ namespace backend.Migrations.Interfaces
         Task<Product> GetProductAsync(int id);
         Task<Product> UpdateProductAsync(int id, Product product);
         Task<int> DeleteProduct(int id);
+        Task<Product> GetRandomProduct();
     }
 }

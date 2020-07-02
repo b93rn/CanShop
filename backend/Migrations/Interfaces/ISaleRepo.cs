@@ -10,5 +10,6 @@ namespace backend.Migrations.Interfaces
         Task<Sale> CreateSaleAsync(int userId, int productId);
         Task<List<Sale>> GetTopSales(int selectTop);
         Task<RefundSaleResult> RefundProductAsync(int id);
+        Task<int> GetUserSaleCountByProdyct(int userId, int productId);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -55,6 +56,19 @@ namespace backend.Data.Repos
         public async Task<Product> GetProductAsync(int id)
         {
             return await _db.Products.Where(x => x.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<Product> GetRandomProduct()
+        {
+            var products = await GetProductsAsync();
+
+            if (products.Count < 1)
+                return null;
+
+            var rnd = new Random();
+            var randomNumber = rnd.Next(products.Count);
+
+            return products[randomNumber];
         }
     }
 }

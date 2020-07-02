@@ -53,6 +53,10 @@ namespace backend.Data.Repos
                 .ToListAsync();
         }
 
+        public Task<int> GetUserSaleCountByProdyct(int userId, int productId) =>
+            _db.Sales.Where(x => x.Buyer.Id == userId && x.Product.Id == productId)
+                .CountAsync();
+
         public async Task<RefundSaleResult> RefundProductAsync(int id)
         {
             var sale = await _db.Sales.Where(x => x.Id == id)

@@ -11,5 +11,6 @@ namespace backend.Migrations.Interfaces
         Task<User> GetUserAsync(int id);
         Task<User> UpdateUserAsync(int id, User user);
         Task<int> DeleteUser(int id);
+        Task<User> GetRandomUser();
     }
 }
